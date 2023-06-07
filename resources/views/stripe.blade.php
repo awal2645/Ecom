@@ -27,16 +27,15 @@
                         </ul>
                     @endforeach
                 @endif
-                @if (isset($ammount))
-                    <div class="checkout__order__total">Subtotal <span>${{ $total }} -
-                            ${{ $ammount->ammount }}</span></div>
+                @if (isset($order_id->shiping->discount_amount))
+                    <div class="checkout__order__total">Subtotal - Coupon <span>${{ $total }} -
+                            ${{ $order_id->shiping->discount_amount }}</span></div>
 
                     <div class="checkout__order__subtotal">Total
-                        <span>${{ $total - $ammount->ammount }}</span>
-                        <input type="hidden" value="{{ $ammount->ammount }}" name="discount_amount">
+                        <span>${{ $total - $order_id->shiping->discount_amount }}</span>
+                        <input type="hidden" value="{{ $order_id->shiping->discount_amount }}" name="discount_amount">
                     </div>
                 @else
-
                     <div class="checkout__order__total">Total <span>${{ $total }}</span></div>
                 @endif
             </div>
@@ -61,11 +60,18 @@
                                 <br>
                                 <div id="card-element" class="form-control"></div>
                                 <input type="hidden" value="{{ $total }}" name="amount">
-                                 <input type="hidden" value="{{ $order_id->order_id }}" name="order_id">
-                                <button id='pay-btn' class="btn btn-success mt-3" type="button"
-                                    style="margin-top: 20px; width: 100%;padding: 7px;" onclick="createToken()">PAY $
-                                    {{ $total }}
-                                </button>
+                                <input type="hidden" value="{{ $order_id->order_id }}" name="order_id">
+                                @if (isset($order_id->shiping->discount_amount))
+                                    <button id='pay-btn' class="btn btn-success mt-3" type="button"
+                                        style="margin-top: 20px; width: 100%;padding: 7px;" onclick="createToken()">PAY $
+                                        {{ $total - $order_id->shiping->discount_amount }} 
+                                    </button>
+                                @else
+                                    <button id='pay-btn' class="btn btn-success mt-3" type="button"
+                                        style="margin-top: 20px; width: 100%;padding: 7px;" onclick="createToken()">PAY $
+                                        {{ $total }}
+                                    </button>
+                                @endif
                                 <form>
                         </div>
                     </div>

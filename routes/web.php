@@ -88,6 +88,7 @@ Route::delete('my/order/remove', [OrderController::class, 'orderRemove'])->name(
 // payment
 Route::controller(StripePaymentController::class)->group(function () {
     Route::get('stripe', 'stripe')->name('stripe');
+    Route::get('stripe/{id}', 'stripeID')->name('stripe.id');
     Route::post('stripe', 'stripePost')->name('stripe.post');
 });
 

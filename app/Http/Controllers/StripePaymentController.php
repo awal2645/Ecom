@@ -19,7 +19,15 @@ class StripePaymentController extends Controller
     public function stripe(): View
     {
         $order_id = Order::where('user_id', Auth::user()->id)->orderBy('order_id', 'desc')->first();
+      
         $order =  Order::where('user_id', Auth::user()->id)->where('order_id', $order_id->order_id)->get();
+
+        return view('stripe', ['order' => $order, 'order_id' => $order_id]);
+    }
+    public function stripeID($id){
+        $order_id = Order::where('user_id', Auth::user()->id)->orderBy('order_id', 'desc')->first();
+
+        $order =  Order::where('user_id', Auth::user()->id)->where('order_id', $id)->get();
 
         return view('stripe', ['order' => $order, 'order_id' => $order_id]);
     }

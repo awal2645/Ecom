@@ -13,6 +13,7 @@ class Shiping extends Model
         "user_id",
         "order_id",
         "pay_ammount",
+        "discount_amount",
         "name",
         "phone",
         "email",
@@ -22,6 +23,6 @@ class Shiping extends Model
     ];
     public function order()
     {
-        return $this->hasOne(Order::class, "order_id");
+        return $this->belongsTo(Order::class, "order_id");
     }
 }

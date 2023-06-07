@@ -15,5 +15,8 @@ class Order extends Model
         "price",
         "qty",
     ];
-   
+    public function shiping()
+    {
+        return $this->belongsTo(Shiping::class, "order_id");
+    }
 }

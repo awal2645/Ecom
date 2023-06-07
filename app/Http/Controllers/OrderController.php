@@ -40,10 +40,15 @@ class OrderController extends Controller
         }
         session()->forget('cart');
         DB::table('orders')->insert($save_data);
+        if(isset($request->discount_amount)){
+            $discount_amount =$request->discount_amount;
+        }else{
+            $discount_amount =0;
+        }
         $shiping_data = Shiping::create([
             'user_id' => $user_id,
             'order_id' => $order_id,
-            'discount_amount' => $request->discount_amount,
+            'discount_amount' => $discount_amount,
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
