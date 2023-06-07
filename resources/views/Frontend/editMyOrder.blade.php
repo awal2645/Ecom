@@ -26,43 +26,39 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="shoping__product">Order Name</th>
-                                    <th class="shoping__product">Shiping Status</th>
-                                    <th class="shoping__product">Action</th>
+                                    <th class="shoping__product">Products</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $total = 0 @endphp
-                                @if (isset($order))
-                                    @foreach ($order as $id => $details)
-                                        <tr data-id="{{ $id }}">
+                                @if ($edit_order)
+                                    @foreach ($edit_order as $id => $details)
+                                        @php  $total += $details['price'] * $details['qty']  @endphp
+                                        <tr data-id="{{ $id=$details->id}}">
                                             <td data-th="Product" class="shoping__cart__item">
                                                 <div class="row">
+                                                    <div class="col-sm-3 hidden-xs"><img src="{{ $details['product_img'] }}"
+                                                            width="100" height="100" class="img-responsive" /></div>
                                                     <div class="col-sm-9">
-                                                        <h4 class="nomargin"> Order No {{ $details->order_id }} </h4>
+                                                        <h4 class="nomargin">{{ $details['product_name'] }}</h4>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td data-th="Product" class="shoping__cart__item">
-                                                <div class="row">
-                                                    <div class="col-sm-9">
-                                                        <h4 class="nomargin"> On the Way </h4>
-                                                    </div>
-                                                </div>
+                                            <td data-th="Price" class="shoping__cart__price">${{ $details['price'] }}</td>
+                                            <td data-th="Quantity" class="shoping__cart__quantity">
+                                                <input type="number" value="{{ $details['qty'] }}"
+                                                    class="form-control quantity update-cart" />
                                             </td>
-                                            <td data-th="Product" class="shoping__cart__item">
-                                                <div class="row">
-                                                    <div class="col-sm-9">
-                                                        <a href="{{ route('my.order.edit',$details->order_id) }}" class="btn btn-info btn-sm edit-from-cart"><i
-                                                                class="fa fa-pencil"></i></a>
-                                                        <a href="{{ $details->order_id }}" class="btn btn-danger btn-sm remove-from-cart"><i
-                                                                class="fa fa-trash-o"></i></a>
-                                                    </div>
-                                                </div>
-
+                                            <td data-th="Subtotal" class="shoping__cart__total">
+                                                ${{ $details['price'] * $details['qty'] }}</td>
+                                            <td class="actions" data-th="">
+                                                <button class="btn btn-danger btn-sm remove-from-cart"><i
+                                                        class="fa fa-trash-o"></i></button>
                                             </td>
-
                                         </tr>
                                     @endforeach
                                 @endif
@@ -100,10 +96,66 @@
 
                     </div>
                 </div>
-
+                <div class="col-lg-6"></div>
+                <div class="col-lg-6">
+                    <div class="shoping__checkout">
+                        <h5>Cart Total</h5>
+                        <ul>
+                            <li>Subtotal <span>${{ $total }}</span></li>
+                            <li>Total <span>${{ $total }}</span></li>
+                        </ul>
+                        <a href="{{ route('checkout.page') }}" class="primary-btn">PROCEED TO CHECKOUT</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+    <!-- Shoping Cart Section End -->
+
+    <script type="text/javascript">
+        $(".update-cart").on('change', function(e) {
+            e.preventDefault();
+
+            var ele = $(this);
+
+            $.ajax({
+                url: '{{ route('update.myorder') }}',
+                method: "patch",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: ele.parents("tr").attr("data-id"),
+                    quantity: ele.parents("tr").find(".quantity").val()
+                },
+                
+                success: function(response) {
+                    $('table').load(location.href + ' .table');
+                    window.location.reload();
+                }
+
+            });
+        });
+
+        $(".remove-from-cart").click(function(e) {
+            e.preventDefault();
+
+            var ele = $(this);
+
+            if (confirm("Are you sure want to remove?")) {
+                $.ajax({
+                    url: '{{ route('order.remove') }}',
+                    method: "DELETE",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: ele.parents("tr").attr("data-id")
+                    },
+                    success: function(response) {
+                        $('table').load(location.href + ' .table');
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+    </script>
     <script>
         @if (Session::has('message'))
             toastr.options = {

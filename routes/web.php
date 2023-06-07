@@ -79,6 +79,10 @@ Route::post('coupon', [FrontendController::class, 'Coupon'])->name('coupon.page'
 //order controller
 Route::post('order', [OrderController::class, 'order'])->name('order');
 Route::get('my/order', [OrderController::class, 'myOrder'])->name('my.order');
+Route::get('my/order/edit/{id}', [OrderController::class, 'myOrderEdit'])->name('my.order.edit');
+Route::patch('my/order/update', [OrderController::class, 'updateMyOrder'])->name('update.myorder');
+Route::delete('my/order/remove', [OrderController::class, 'orderRemove'])->name('order.remove');
+
 
 
 // payment

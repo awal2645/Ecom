@@ -9,7 +9,7 @@
 
         <div class="container">
 
-            <h1 class="text-center"> Stripe Payment Gateway </h1>
+            <h1 class="text-center mb-3"> Stripe Payment Gateway </h1>
             <div class="checkout__order">
 
                 <h4>Your Order</h4>
@@ -36,8 +36,6 @@
                         <input type="hidden" value="{{ $ammount->ammount }}" name="discount_amount">
                     </div>
                 @else
-                    <div class="checkout__order__subtotal">Subtotal <span>${{ $total }}</span>
-                    </div>
 
                     <div class="checkout__order__total">Total <span>${{ $total }}</span></div>
                 @endif
@@ -46,7 +44,7 @@
                 <div class="col-md-12 col-md-offset-3">
                     <div class="panel panel-default credit-card-box">
                         <div class="panel-heading display-table">
-                            <h2 class="text-center">Checkout Forms</h2>
+                            <h2 class="text-center mt-3">Payment Forms</h2>
                         </div>
                         <div class="panel-body">
 

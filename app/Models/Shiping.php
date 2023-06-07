@@ -20,4 +20,8 @@ class Shiping extends Model
         "postcode",
         "address",
     ];
+    public function order()
+    {
+        return $this->hasOne(Order::class, "order_id");
+    }
 }

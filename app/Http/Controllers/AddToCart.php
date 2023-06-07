@@ -76,8 +76,4 @@ class AddToCart extends Controller
         }
     }
 
-
-    public function order()
-    {
-    }
 }
