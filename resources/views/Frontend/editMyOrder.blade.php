@@ -62,28 +62,6 @@
                                         </tr>
                                     @endforeach
                                 @endif
-                                {{-- <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="{{asset('Frontend')}}/img/cart/cart-1.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $55.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $110.00
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr> --}}
                             </tbody>
                         </table>
                     </div>
@@ -94,17 +72,6 @@
                     <div class="shoping__cart__btns">
                         <a href="{{ url('/') }}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
 
-                    </div>
-                </div>
-                <div class="col-lg-6"></div>
-                <div class="col-lg-6">
-                    <div class="shoping__checkout">
-                        <h5>Cart Total</h5>
-                        <ul>
-                            <li>Subtotal <span>${{ $total }}</span></li>
-                            <li>Total <span>${{ $total }}</span></li>
-                        </ul>
-                        <a href="{{ route('checkout.page') }}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>

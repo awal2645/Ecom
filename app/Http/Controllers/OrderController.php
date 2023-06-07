@@ -68,23 +68,29 @@ class OrderController extends Controller
         return view('Frontend.editMyOrder', ['edit_order' => $edit_order]);
     }
 
-    public function updateMyOrder (Request $request){
+    public function updateMyOrder(Request $request)
+    {
         if ($request->id && $request->quantity) {
             $update_order = Order::find($request->id);
             $update_order->qty = $request->quantity;
             $update_order->update();
             session()->flash('message', 'Product removed successfully');
         }
-       
-
     }
     public function orderRemove(Request $request)
     {
         if ($request->id) {
-            $cart = Order::findOrFail($request->id);
-            if (isset($cart)) {
-                $cart->delete();
+            $orderRemove = Order::findOrFail($request->id);
+            $orderId = Order::where('order_id', $orderRemove->order_id)->get();
+            if (count($orderId) == 1) {
+                $shipingId = Shiping::where('order_id',  $orderRemove->order_id)->first();
+                $shipingId->delete();
             }
+            if (isset($orderRemove)) {
+                $orderRemove->delete();
+            }
+
+
             session()->flash('error', 'Product removed successfully');
         }
     }

@@ -28,7 +28,7 @@
                                 <tr>
                                     <th class="shoping__product">Order Name</th>
                                     <th class="shoping__product">Shiping Status</th>
-                                    <th class="shoping__product">Action</th>
+                                    <th class="">Action</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -51,13 +51,11 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td data-th="Product" class="shoping__cart__item">
+                                            <td data-th="Product" class="">
                                                 <div class="row">
                                                     <div class="col-sm-9">
                                                         <a href="{{ route('my.order.edit',$details->order_id) }}" class="btn btn-info btn-sm edit-from-cart"><i
-                                                                class="fa fa-pencil"></i></a>
-                                                        <a href="{{ $details->order_id }}" class="btn btn-danger btn-sm remove-from-cart"><i
-                                                                class="fa fa-trash-o"></i></a>
+                                                                class="fa fa-eye"></i></a>
                                                     </div>
                                                 </div>
 
