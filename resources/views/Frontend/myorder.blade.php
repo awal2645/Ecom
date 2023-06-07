@@ -55,9 +55,15 @@
                                             <td data-th="Product" class="shoping__cart__item">
                                                 <div class="row">
                                                     <div class="col-sm-9">
-                                                        <a href="{{ route('stripe.id', $details->order_id) }}"
-                                                            class=" btn btn-danger ">
-                                                            {{ $details->order->payment_status }} </a>
+
+                                                       
+                                                            <a @if ( $details->payment_status  =="Paid") class=" btn btn-success " @else href="{{ route('stripe.id', $details->order_id) }}"
+                                                                class=" btn btn-danger "  @endif>
+                                                                {{ $details->order->payment_status }} </a>
+                                                        
+                                                       
+                                                       
+                                                       
                                                     </div>
                                                 </div>
                                             </td>

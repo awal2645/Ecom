@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Shiping;
 use Illuminate\Http\Request;
 use Stripe;
 use Illuminate\View\View;
@@ -49,11 +50,14 @@ class StripePaymentController extends Controller
             "description" => "Test payment from "
         ]);
         $updaeId = Order::where('order_id',$request->order_id)->get();
+        $updaePaymentStatus = Shiping::where('order_id',$request->order_id)->first();
+
         foreach($updaeId as $data){
             $data->payment_status = "Paid";
             $data->update();
         }
-        
+        $updaePaymentStatus->payment_status = "Paid";
+        $updaePaymentStatus->update();
         return redirect()->route('my.order')->with('message', 'Payment successful!');
     }
 }

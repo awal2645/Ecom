@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('order_id');
             $table->string('pay_ammount')->nullable();
+            $table->string('payment_status')->default('Pending');
             $table->string('account_number')->nullable();
             $table->integer('discount_amount')->default(0);
             $table->string('name')->nullable();
