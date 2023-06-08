@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Session as FacadesSession;
 
 class OrderController extends Controller
 {
+    //order list controller 
+
+     public function orderList(){
+        $orderLists=Shiping::latest()->get();
+        return view("Backend.Order.orderList", ['orderLists'=>$orderLists]);
+     }
+    
+    //order store ontroller
+
     public function order(Request $request)
     {
         $request->validate([
@@ -40,10 +49,10 @@ class OrderController extends Controller
         }
         session()->forget('cart');
         DB::table('orders')->insert($save_data);
-        if(isset($request->discount_amount)){
-            $discount_amount =$request->discount_amount;
-        }else{
-            $discount_amount =0;
+        if (isset($request->discount_amount)) {
+            $discount_amount = $request->discount_amount;
+        } else {
+            $discount_amount = 0;
         }
         $shiping_data = Shiping::create([
             'user_id' => $user_id,

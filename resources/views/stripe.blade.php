@@ -61,17 +61,24 @@
                                 <div id="card-element" class="form-control"></div>
                                 <input type="hidden" value="{{ $total }}" name="amount">
                                 <input type="hidden" value="{{ $order_id->order_id }}" name="order_id">
-                                @if (isset($order_id->shiping->discount_amount))
-                                    <button id='pay-btn' class="btn btn-success mt-3" type="button"
-                                        style="margin-top: 20px; width: 100%;padding: 7px;" onclick="createToken()">PAY $
-                                        {{ $total - $order_id->shiping->discount_amount }} 
-                                    </button>
+                                @if ($order_id->shiping->payment_status == "Paid")
+                                <a  href="{{route('my.order')}}" class="btn btn-danger mt-3" type="button"
+                                style="margin-top: 20px; width: 100%;padding: 7px;" > Your Payment Done 
+                            </a>
                                 @else
-                                    <button id='pay-btn' class="btn btn-success mt-3" type="button"
-                                        style="margin-top: 20px; width: 100%;padding: 7px;" onclick="createToken()">PAY $
-                                        {{ $total }}
-                                    </button>
+                                    @if (isset($order_id->shiping->discount_amount))
+                                        <button id='pay-btn' class="btn btn-success mt-3" type="button"
+                                            style="margin-top: 20px; width: 100%;padding: 7px;" onclick="createToken()">PAY $
+                                            {{ $total - $order_id->shiping->discount_amount }} 
+                                        </button>
+                                    @else
+                                        <button id='pay-btn' class="btn btn-success mt-3" type="button"
+                                            style="margin-top: 20px; width: 100%;padding: 7px;" onclick="createToken()">PAY $
+                                            {{ $total }}
+                                        </button>
+                                    @endif
                                 @endif
+                               
                                 <form>
                         </div>
                     </div>
