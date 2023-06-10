@@ -72,6 +72,9 @@ Route::get('my/order/edit/{id}', [OrderController::class, 'myOrderEdit'])->name(
 Route::patch('my/order/update', [OrderController::class, 'updateMyOrder'])->name('update.myorder');
 Route::delete('my/order/remove', [OrderController::class, 'orderRemove'])->name('order.remove');
 
+// shiping update controller
+Route::post('order/status-update', [OrderController::class, 'orderStatusUpdate'])->name('order.status.update');
+
 // payment controller 
 Route::controller(StripePaymentController::class)->group(function () {
     Route::get('stripe', 'stripe')->name('stripe');

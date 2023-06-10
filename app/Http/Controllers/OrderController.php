@@ -84,12 +84,18 @@ class OrderController extends Controller
 
     public function updateMyOrder(Request $request)
     {
-        if ($request->id && $request->quantity) {
-            $update_order = Order::find($request->id);
-            $update_order->qty = $request->quantity;
-            $update_order->update();
-            session()->flash('message', 'Product removed successfully');
+        $update_order = Order::find($request->id);
+        if($update_order->payment_status == "Paid"){
+            session()->flash('error', 'This Order Already Compelete!');
         }
+        else{
+            if ($request->id && $request->quantity) {
+                $update_order->qty = $request->quantity;
+                $update_order->update();
+                session()->flash('message', 'Product removed successfully');
+            }
+        }
+      
     }
     public function orderRemove(Request $request)
     {
@@ -107,5 +113,15 @@ class OrderController extends Controller
 
             session()->flash('error', 'Product removed successfully');
         }
+    }
+
+    public function orderStatusUpdate(Request $request){
+       
+        $orderId = Shiping::find($request->order_id);
+        $orderId->shiping_status = $request->data;
+        $orderId->update();
+         return redirect()->back();
+
+
     }
 }

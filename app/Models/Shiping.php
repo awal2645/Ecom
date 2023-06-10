@@ -13,6 +13,7 @@ class Shiping extends Model
         "user_id",
         "order_id",
         "pay_ammount",
+        "shiping_status",
         "discount_amount",
         "name",
         "phone",

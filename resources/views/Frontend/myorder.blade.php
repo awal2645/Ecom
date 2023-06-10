@@ -48,7 +48,7 @@
                                             <td data-th="Product" class="shoping__cart__item">
                                                 <div class="row">
                                                     <div class="col-sm-9">
-                                                        <h4 class="nomargin"> On the Way </h4>
+                                                        <h4 class="nomargin">{{$details->shiping_status}} </h4>
                                                     </div>
                                                 </div>
                                             </td>
