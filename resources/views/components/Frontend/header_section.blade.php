@@ -5,7 +5,11 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__left">
                         <ul>
-                            <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                            @php
+                            $data = App\Models\FrontnendSetting::all()->first();
+                            $socialAccounts = App\Models\SocialAccount::all();
+                            @endphp
+                            <li> <i class="fa fa-envelope"></i> Email:{{$data->email}}</li>
                             <li>Free Shipping for all Order of $99</li>
                         </ul>
                     </div>
@@ -13,10 +17,9 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
                         <div class="header__top__right__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            @foreach ($socialAccounts as $socialAccount)
+                            <a href="{{$socialAccount->link}}"><i class="{{$socialAccount->icon_name}}"></i></a>
+                            @endforeach 
                         </div>
                         <div class="header__top__right__language">
                             <img src="img/language.png" alt="">
@@ -66,7 +69,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="{{ route('home.page') }}"><img src="{{ asset('Frontend') }}/img/logo.png"
+                    <a href="{{ route('home.page') }}"><img src="{{$data->logo}} "
                             alt=""></a>
                 </div>
             </div>
@@ -99,7 +102,14 @@
                         <li><a href="{{ route('cart') }}"><i class="fa fa-shopping-bag"></i>
                                 <span>{{ count((array) session('cart')) }}</span></a></li>
                     </ul>
-                    <div class="header__cart__price">item: <span>$150.00</span></div>
+                    <div class="header__cart__price">item: <span> 
+                        @php $total = 0 @endphp
+                        @if (session('cart'))
+                        @foreach (session('cart') as $id => $details)
+                            @php $total += $details['price'] * $details['quantity'] @endphp
+                           
+                        @endforeach
+                    @endif {{$total}}Taka</span></div>
                 </div>
             </div>
         </div>

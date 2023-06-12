@@ -7,9 +7,13 @@
                         <a href="./index.html"><img src="img/logo.png" alt=""></a>
                     </div>
                     <ul>
-                        <li>Address: 60-49 Road 11378 New York</li>
-                        <li>Phone: +65 11.188.888</li>
-                        <li>Email: hello@colorlib.com</li>
+                        @php
+                            $data = App\Models\FrontnendSetting::all()->first();
+                            $socialAccounts = App\Models\SocialAccount::all();
+                            @endphp
+                        <li>Address:{{$data->address}}</li>
+                        <li>Phone:{{$data->tel}}</li>
+                        <li>Email:{{$data->email}}</li>
                     </ul>
                 </div>
             </div>
@@ -43,10 +47,10 @@
                         <button type="submit" class="site-btn">Subscribe</button>
                     </form>
                     <div class="footer__widget__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                        @foreach ($socialAccounts as $socialAccount)
+                        <a href="{{$socialAccount->link}}"><i class="{{$socialAccount->icon_name}}"></i></a>
+                        @endforeach 
+                        
                     </div>
                 </div>
             </div>

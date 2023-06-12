@@ -44,6 +44,18 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
                         <h3>{{ $product_details->name }}</h3>
+                        <form method="POST">
+                            @csrf
+                            <label for="rating">Rating:</label>
+                            <select name="rating" id="rating"  onchange="this.form.submit()">
+                                <input type="hidden" value="{{ $product_details->id }}" name="product_id">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </form>
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>

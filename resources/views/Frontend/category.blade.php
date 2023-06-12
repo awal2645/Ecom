@@ -53,7 +53,7 @@
                                 @foreach ($categories as $category)
                                     <li
                                         @if (isset($nav)) class="{{ request()->is('category/sort/' . $category->slug) ? 'active_nav' : '' }}"
-                        @else
+                                @else
                         class="{{ request()->is('category/' . $category->slug) ? 'active_nav' : '' }}" @endif>
                                         <a href="{{ url('category/' . $category->slug) }}">{{ $category->name }}</a>
                                     </li>
@@ -184,7 +184,6 @@
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
-
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
@@ -232,7 +231,6 @@
                     </div>
                     <div class="row" id="product-list">
                     </div>
-
                     <div class="row" id="product_old_list">
                         @foreach ($products as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6" id="product-container">
@@ -246,8 +244,7 @@
                                                     method="POST">
                                                     @csrf
                                                     <input type="hidden" value="1" name="qty">
-                                                    <a onclick='$("#add_to_cart").submit()' type="submit"><i
-                                                            class="fa fa-shopping-cart"></i></a>
+                                                    <button type="submit"><i class="fa fa-shopping-cart"></i></button>
                                                 </form>
                                             </li>
                                         </ul>

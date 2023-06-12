@@ -1,5 +1,7 @@
 @php
     $categories = App\Models\Category::all();
+    $data = App\Models\FrontnendSetting::all()->first();
+
 @endphp
 <section class="hero">
     <div class="container">
@@ -40,12 +42,13 @@
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>+65 11.188.888</h5>
+                            <h5>{{$data->tel}}</h5>
                             <span>support 24/7 time</span>
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="{{ asset('Frontend') }}/img/hero/banner.jpg">
+                
+                <div class="hero__item set-bg" data-setbg="{{$data->banner}}">
                     <div class="hero__text">
                         <span>FRUIT FRESH</span>
                         <h2>Vegetable <br />100% Organic</h2>

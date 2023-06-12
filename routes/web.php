@@ -5,13 +5,19 @@ use App\Http\Controllers\Auth\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\FrontnendSettingController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SocialAccountController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\UserDetailsController;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 // Route::get('/', function () {
@@ -21,31 +27,54 @@ use Illuminate\Support\Facades\Auth;
 //login Controller start
 Auth::routes();
 
-//google login
+//Google login
 Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
 Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle'])->name('callbackGoogle');
 
-// fb login 
+//Fb login 
 Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook'])->name('auth.facebook');
 Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
-// Admin User Login 
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Admin User Login 
+Route::get('/profile', [HomeController::class, 'index'])->name('home');
 Route::post('profile', [UserDetailsController::class, 'updateUserDetails'])->name('store.user.details');
 Route::post('user-password', [UserDetailsController::class, 'updatePassword'])->name('update.password');
-// Admin Controller Start
+
+//Admin Controller Start
 Route::get('/admin', [LoginController::class, 'showAdminLoginForm'])->name('admin.login-view');
 Route::post('/admin', [LoginController::class, 'adminLogin'])->name('admin.login');
-
 Route::get('/admin/register', [RegisterController::class, 'showAdminRegisterForm'])->name('admin.register-view');
 Route::post('/admin/register', [RegisterController::class, 'createAdmin'])->name('admin.register');
 Route::get('/admin/dashboard', function () {
-    return view('admin');
+
+    $orders = Order::all();
+    $products = Product::all();
+    return view('admin', ['orders' => $orders,'products'=>$products]);
 })->name('admin')->middleware('auth:admin');
 Route::get('/admin/profile', [AdminController::class, 'showAdminProfile'])->name('admin.profile')->middleware('auth:admin');
 Route::post('/admin/profile', [AdminController::class, 'updateAdminDetails'])->name('update.profile.details');
 Route::post('admin-password', [AdminController::class, 'updateAdminPassword'])->name('update.admin.password');
 
-// Frontend  Controller start
+//Category Controller Start
+Route::get('admin/category/list', [CategoryController::class, 'categoryList'])->name('category.list');
+Route::get('admin/category/add', [CategoryController::class, 'categoryAdd'])->name('category.add');
+Route::post('admin/category/store', [CategoryController::class, 'categoryStore'])->name('category.store');
+Route::get('admin/category/edit/{id}', [CategoryController::class, 'categoryEdit'])->name('category.edit');
+Route::post('admin/category/update/{id}', [CategoryController::class, 'categoryUpdate'])->name('category.update');
+Route::get('admin/category/delete/{id}', [CategoryController::class, 'categoryDelete'])->name('category.delete');
+
+//Frontend Setting Controller Start
+Route::get('admin/frontend/setting',[FrontnendSettingController::class, 'frontendSetting'])->name('frontend.setting');
+Route::post('admin/frontend/setting/update/{id}',[FrontnendSettingController::class, 'frontendSettingUpdate'])->name('frontend.setting.update');
+
+// Social Account Controller Start
+Route::get('admin/social-account', [SocialAccountController::class, 'showSocialAccount'])->name('show.social.account');
+Route::post('admin/social-account', [SocialAccountController::class, 'socialAccountStore'])->name('scocial.account.store');
+Route::get('admin/social-account/{id}', [SocialAccountController::class, 'socialAccountEdit'])->name('scocial.account.edit');
+Route::post('admin/social-account/{id}', [SocialAccountController::class, 'socialAccountUpdate'])->name('scocial.account.update');
+Route::get('admin/social-account/delete/{id}', [SocialAccountController::class, 'socialAccountDelete'])->name('scocial.account.delete');
+
+//Frontend  Controller Start
 Route::get('/', [FrontendController::class, 'homePage'])->name('home.page');
 Route::get('/shop', [FrontendController::class, 'shopPage'])->name('shop.page');
 Route::get('shoping-cart', [FrontendController::class, 'shopingCartPage'])->name('shoping.cart.page');
@@ -56,7 +85,7 @@ Route::get('blog-details/{slug}', [FrontendController::class, 'blogDetailsPage']
 Route::get('blog', [FrontendController::class, 'blogPage'])->name('blog.page');
 Route::get('contact', [FrontendController::class, 'contactPage'])->name('contact.page');
 
-//add to cart controller
+//Add to cart controller
 Route::get('cart', [AddToCart::class, 'cart'])->name('cart')->middleware('auth');
 Route::post('add-to-cart/{id}', [AddToCart::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [AddToCart::class, 'update'])->name('update.cart');
@@ -64,7 +93,7 @@ Route::delete('remove-from-cart', [AddToCart::class, 'remove'])->name('remove.fr
 Route::get('checkout', [FrontendController::class, 'checkoutPage'])->name('checkout.page')->middleware('auth');
 Route::post('coupon', [FrontendController::class, 'Coupon'])->name('coupon.page')->middleware('auth');
 
-//order controller
+//Order controller
 Route::get('order/list', [OrderController::class, 'orderList'])->name('order.list');
 Route::post('order', [OrderController::class, 'order'])->name('order');
 Route::get('my/order', [OrderController::class, 'myOrder'])->name('my.order');
@@ -72,17 +101,17 @@ Route::get('my/order/edit/{id}', [OrderController::class, 'myOrderEdit'])->name(
 Route::patch('my/order/update', [OrderController::class, 'updateMyOrder'])->name('update.myorder');
 Route::delete('my/order/remove', [OrderController::class, 'orderRemove'])->name('order.remove');
 
-// shiping update controller
+//Shiping update controller
 Route::post('order/status-update', [OrderController::class, 'orderStatusUpdate'])->name('order.status.update');
 
-// payment controller 
+//Payment controller 
 Route::controller(StripePaymentController::class)->group(function () {
     Route::get('stripe', 'stripe')->name('stripe');
     Route::get('stripe/{id}', 'stripeID')->name('stripe.id');
     Route::post('stripe', 'handleWebhook')->name('stripe.post');
 });
 
-//search controller 
+//Search controller 
 Route::get('search', [SearchController::class, 'searchResault'])->name('search');
 Route::get('shop-search', [SearchController::class, 'shopFilter'])->name('search.shop');
 Route::get('/products/sort', [SearchController::class, 'shortBy'])->name('short.by');

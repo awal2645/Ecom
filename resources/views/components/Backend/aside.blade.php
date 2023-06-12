@@ -63,7 +63,7 @@
             <span class="nav-link">Navigation</span>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{route('admin')}}">
                 <span class="menu-icon">
                     <i class="mdi mdi-speedometer"></i>
                 </span>
@@ -81,8 +81,8 @@
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{route('order.list')}}">Order List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
+                    <li class="nav-item"> <a class="nav-link {{ Route::currentRouteName() == 'category.list' ? '' : '' }}" href="{{route('order.list')}}">Order List</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('category.list')}}">Category List</a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
                     </li>
                 </ul>
@@ -126,12 +126,18 @@
                 <span class="menu-icon">
                     <i class="mdi mdi-security"></i>
                 </span>
-                <span class="menu-title">User Pages</span>
+                <span class="menu-title">Frontend Settings</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="auth">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a>
+                    <li class="nav-item ">
+                        <a class="nav-link"
+                            href="{{route('frontend.setting')}}">
+                            Settings
+                        </a>
+                    </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('show.social.account')}}"> Social Account</a>
                     </li>
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
@@ -139,15 +145,6 @@
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
                 </ul>
             </div>
-        </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link"
-                href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
-                <span class="menu-icon">
-                    <i class="mdi mdi-file-document-box"></i>
-                </span>
-                <span class="menu-title">Documentation</span>
-            </a>
         </li>
     </ul>
 </nav>

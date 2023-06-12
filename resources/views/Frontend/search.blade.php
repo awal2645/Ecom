@@ -194,8 +194,7 @@
                                                     method="POST">
                                                     @csrf
                                                     <input type="hidden" value="1" name="qty">
-                                                    <a onclick='$("#add_to_cart").submit()' type="submit"><i
-                                                            class="fa fa-shopping-cart"></i></a>
+                                                    <button type="submit"><i class="fa fa-shopping-cart"></i></button>
                                                 </form>
                                             </li>
                                         </ul>

@@ -39,7 +39,7 @@
                                     @foreach ($order as $id => $details)
                                         <tr data-id="{{ $id }}">
                                             <td data-th="Product" class="shoping__cart__item">
-                                                <div class="row">
+                                            <div class="row">
                                                     <div class="col-sm-9">
                                                         <h4 class="nomargin"> Order No {{ $details->order_id }} </h4>
                                                     </div>
