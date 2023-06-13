@@ -7,6 +7,7 @@ use App\Models\BlogCategory;
 use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\Product;
+use App\Models\ProductRating;
 use App\Models\Tag;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
@@ -65,7 +66,9 @@ class FrontendController extends Controller
     {
         $product_details = Product::where('slug', $slug)->first();
         $related_products = Product::where('category_id', $product_details->category_id)->take(4)->get();
-        return view("Frontend.shop_details", ['product_details' => $product_details, 'related_products' => $related_products]);
+        $rating = ProductRating::where('product_id', $product_details->id)->get();
+        $avg = ProductRating::where('product_id', $product_details->id)->sum('rating');
+        return view("Frontend.shop_details", ['product_details' => $product_details, 'related_products' => $related_products,'rating'=>$rating,'avg' => $avg]);
     }
 
     //product category page

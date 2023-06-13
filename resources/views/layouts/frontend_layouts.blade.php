@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
@@ -61,10 +60,5 @@
 <script src="{{asset('Frontend')}}/js/mixitup.min.js"></script>
 <script src="{{asset('Frontend')}}/js/owl.carousel.min.js"></script>
 <script src="{{asset('Frontend')}}/js/main.js"></script>
-
-
-
-
 </body>
-
 </html>

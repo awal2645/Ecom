@@ -1,5 +1,56 @@
 @extends('layouts.frontend_layouts')
 @section('content')
+<style>
+h1, h2, h3, h4, h5, h6{
+    color: gold;
+}
+.glyphicon .glyphicon-sta{
+    color: gold;
+}
+.btn-grey{
+    background-color:#D8D8D8;
+	color:#FFF;
+}
+.rating-block{
+	background-color:#FAFAFA;
+	border:1px solid #EFEFEF;
+	padding:15px 15px 20px 15px;
+	border-radius:3px;
+}
+.bold{
+	font-weight:700;
+}
+.padding-bottom-7{
+	padding-bottom:7px;
+}
+
+.review-block{
+	background-color:#FAFAFA;
+	border:1px solid #EFEFEF;
+	padding:15px;
+	border-radius:3px;
+	margin-bottom:15px;
+}
+.review-block-name{
+	font-size:12px;
+	margin:10px 0;
+}
+.review-block-date{
+	font-size:12px;
+}
+.review-block-rate{
+	font-size:13px;
+	margin-bottom:15px;
+}
+.review-block-title{
+	font-size:15px;
+	font-weight:700;
+	margin-bottom:10px;
+}
+.review-block-description{
+	font-size:13px;
+}
+</style>
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="{{ asset('Frontend') }}/img/breadcrumb.jpg">
         <div class="container">
@@ -41,28 +92,17 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
-                        <h3>{{ $product_details->name }}</h3>
-                        <form method="POST">
-                            @csrf
-                            <label for="rating">Rating:</label>
-                            <select name="rating" id="rating"  onchange="this.form.submit()">
-                                <input type="hidden" value="{{ $product_details->id }}" name="product_id">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </form>
+                        <h3>{{ $product_details->name }}</h3>  
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-half-o"></i>
-                            <span>(18 reviews)</span>
+                            <span>({{ count($rating) }})</span>
                         </div>
                         <div class="product__details__price">$ {{ $product_details->price }}</div>
                         <p>{{ $product_details->details }}</p>
@@ -110,6 +150,7 @@
                             </li>
                         </ul>
                         <div class="tab-content">
+                            
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Products Infomation</h6>
@@ -122,20 +163,86 @@
                                     <p>{{ $product_details->description }}</p>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                <div class="product__details__tab__desc">
-                                    <h6>Products Infomation</h6>
-                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
-                                        Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
-                                        Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
-                                        sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
-                                        eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
-                                        Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
-                                        sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
-                                        diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
-                                        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-                                        Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
-                                        Proin eget tortor risus.</p>
+                            <div class="tab-pane mt-5" id="tabs-3" role="tabpanel">
+                                <div class="product__details__tab__des d-block ">
+                                    <form action="{{route('rating.add')}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" value="{{ $product_details->id }}" name="product_id">
+                                        <div class="row">
+                                            <div class="col-3"></div>
+                                            <div class="col-sm-3">
+                                                <div class="rating-block">
+                                                    <h4>Average user rating</h4>
+                                                    <h2 class="ml-2 padding-bottom-7">
+                                                        <small> @if ($avg!=0)
+                                                            {{ $avg/count($rating)}} 
+                                                            @endif</small> <small>/ 5</small>
+                                                        @if (isset($user))
+                                                        <select name="rating" id="rating" class="btn" >
+                            
+                                                            <option value="1" {{$user->rating==1  ? 'selected' : '' }} >★</option>
+                                                            <option value="2"  {{$user->rating==2  ? 'selected' : '' }}>★★</option>
+                                                            <option value="3"  {{$user->rating==3  ? 'selected' : '' }}>★★★</option>
+                                                            <option value="4"  {{$user->rating==5  ? 'selected' : '' }}>★★★★</option>
+                                                            <option value="5"  {{$user->rating==5  ? 'selected' : '' }}>★★★★★</option>
+                                                        </select>
+                                                        @else
+                                                        <select name="rating" id="rating" class="rating-select" >
+                                                            <option value="1">★</option>
+                                                            <option value="2">★★</option>
+                                                            <option value="3">★★★</option>
+                                                            <option value="4">★★★★</option>
+                                                            <option value="5">★★★★★</option>
+                                                        </select>
+                                                    @endif</h2>
+                                   
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <h4> Comment</h4>
+                                             <textarea name="comment" id="" cols="50" rows="5"></textarea>
+                                                <button class="site-btn">Submit</button>
+                                            </div>			
+                                        </div>			
+                                        
+                                        <div class="row">
+                                            <div class="col-3"></div>
+                                            <div class="col-sm-6">
+                                                <hr/>
+                                                <div class="review-block">
+                                                    @foreach ($rating as $rating_detail)
+                                                    <div class="row">
+                                                        <col-3></col-3>
+                                                        <div class="col-sm-3">
+                                                            <div class="review-block-name">{{$rating_detail->user->name}}</div>
+                                                            <div class="review-block-date">{{$rating_detail->updated_at->format('M d, Y')}}</div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="review-block-rate">
+                                                                @if ($rating_detail->rating ==1 )
+                                                                <h4>★</h4>
+                                                                @elseif($rating_detail->rating ==2)
+                                                                <h4>★★</h4>
+                                                                @elseif($rating_detail->rating ==3)
+                                                                <h4>★★★</h4>
+                                                                @elseif($rating_detail->rating ==4)
+                                                                <h4>★★★★</h4>
+                                                                @elseif($rating_detail->rating ==5)
+                                                                <h4>★★★★★</h4>
+                                                                @endif                                                              
+                                                            </div>
+                                                            
+                                                            <div class="review-block-description">{{$rating_detail->comment}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <hr/>
+                                                    @endforeach
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
                                 </div>
                             </div>
                         </div>

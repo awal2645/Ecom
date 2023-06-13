@@ -109,7 +109,7 @@
                             @php $total += $details['price'] * $details['quantity'] @endphp
                            
                         @endforeach
-                    @endif {{$total}}Taka</span></div>
+                    @endif ${{$total}}</span></div>
                 </div>
             </div>
         </div>

@@ -12,6 +12,7 @@ use App\Http\Controllers\FrontnendSettingController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductRatingController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SocialAccountController;
 use App\Http\Controllers\StripePaymentController;
@@ -116,5 +117,9 @@ Route::get('search', [SearchController::class, 'searchResault'])->name('search')
 Route::get('shop-search', [SearchController::class, 'shopFilter'])->name('search.shop');
 Route::get('/products/sort', [SearchController::class, 'shortBy'])->name('short.by');
 Route::get('/category/sort/{slug}', [SearchController::class, 'shortByCategory'])->name('short.by.category');
+
+// Rating Add Controller
+Route::post('product/rating', [ProductRatingController::class, 'ratingAdd'])->name('rating.add')->middleware('auth');
+
 // Frontend  Controller end
 
