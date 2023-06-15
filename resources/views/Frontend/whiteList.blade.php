@@ -6,10 +6,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>My Shopping Cart</h2>
+                        <h2>My White List</h2>
                         <div class="breadcrumb__option">
                             <a href="{{route('home.page')}}">Home</a>                            <span>White List</span>
-                            <span>Shopping Cart</span>
                         </div>
                     </div>
                 </div>
@@ -30,13 +29,13 @@
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $total = 0 @endphp
-                                @if (session('cart'))
-                                    @foreach (session('cart') as $id => $details)
+                                @if (session('whiteList'))
+                                    @foreach (session('whiteList') as $id => $details)
                                         @php $total += $details['price'] * $details['quantity'] @endphp
                                         <tr data-id="{{ $id }}">
                                             <td data-th="Product" class="shoping__cart__item">
@@ -53,14 +52,20 @@
 
                                                 <input type="number" value="{{ $details['quantity'] }}"
                                                     class="form-control quantity update-cart" />
-
-
                                             </td>
                                             <td data-th="Subtotal" class="shoping__cart__total">
                                                 ${{ $details['price'] * $details['quantity'] }}</td>
-                                            <td class="actions" data-th="">
-                                                <button class="btn btn-danger btn-sm remove-from-cart"><i
+                                            <td class="mt-4 d-flex " data-th="">
+                                                <button class="btn btn-danger  remove-whiteList"><i
                                                         class="fa fa-trash-o"></i></button>
+                                                <form id="add_to_cart" action="{{ route('add.to.cart', $details['id']) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <input type="hidden" value="1" name="qty">
+                                                    <input type="hidden" value=" $details['id']" name="p_Id">
+                                                    <button class="ml-2 btn site-btn" type="submit"><i
+                                                            class="fa fa-shopping-cart"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -93,23 +98,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="shoping__cart__btns">
                         <a href="{{ url('/') }}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
 
                     </div>
                 </div>
-                <div class="col-lg-6"></div>
                 <div class="col-lg-6">
-                    <div class="shoping__checkout">
-                        <h5>Cart Total</h5>
-                        <ul>
-                            <li>Subtotal <span>${{ $total }}</span></li>
-                            <li>Total <span>${{ $total }}</span></li>
-                        </ul>
-                        <a href="{{ route('checkout.page') }}" class="primary-btn">PROCEED TO CHECKOUT</a>
+                    <div class="shoping__cart__btns text-center">
+                        <a href="{{ route('clear.list') }}" class="primary-btn cart-btn">Clear White List</a>
+
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -122,7 +123,7 @@
             var ele = $(this);
 
             $.ajax({
-                url: '{{ route('update.cart') }}',
+                url: '{{ route('update.whiteList') }}',
                 method: "patch",
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -137,14 +138,14 @@
             });
         });
 
-        $(".remove-from-cart").click(function(e) {
+        $(".remove-whiteList").click(function(e) {
             e.preventDefault();
 
             var ele = $(this);
 
             if (confirm("Are you sure want to remove?")) {
                 $.ajax({
-                    url: '{{ route('remove.from.cart') }}',
+                    url: '{{ route('remove.whiteList') }}',
                     method: "DELETE",
                     data: {
                         _token: '{{ csrf_token() }}',

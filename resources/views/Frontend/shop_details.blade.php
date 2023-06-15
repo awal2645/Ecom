@@ -1,68 +1,197 @@
 @extends('layouts.frontend_layouts')
 @section('content')
-<style>
-h1, h2, h3, h4, h5, h6{
-    color: gold;
-}
-.rating-title{
-    color: black;
-}
-.alt-btn{
-    color: red;
-}
-.alt-btn a{
-    color: green;
-}
-.alt-btn :hover{
-    color: green;
-}
-.glyphicon .glyphicon-sta{
-    color: gold;
-}
-.btn-grey{
-    background-color:#D8D8D8;
-	color:#FFF;
-}
-.rating-block{
-	background-color:#FAFAFA;
-	border:1px solid #EFEFEF;
-	padding:15px 15px 20px 15px;
-	border-radius:3px;
-}
-.bold{
-	font-weight:700;
-}
-.padding-bottom-7{
-	padding-bottom:7px;
-}
+    <style>
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: gold;
+        }
 
-.review-block{
-	background-color:#FAFAFA;
-	border:1px solid #EFEFEF;
-	padding:15px;
-	border-radius:3px;
-	margin-bottom:15px;
-}
-.review-block-name{
-	font-size:12px;
-	margin:10px 0;
-}
-.review-block-date{
-	font-size:12px;
-}
-.review-block-rate{
-	font-size:13px;
-	margin-bottom:15px;
-}
-.review-block-title{
-	font-size:15px;
-	font-weight:700;
-	margin-bottom:10px;
-}
-.review-block-description{
-	font-size:13px;
-}
-</style>
+        .rating-title {
+            color: black;
+        }
+
+        .alt-btn {
+            color: red;
+        }
+
+        .alt-btn a {
+            color: green;
+        }
+
+        .alt-btn :hover {
+            color: green;
+        }
+
+        .glyphicon .glyphicon-sta {
+            color: gold;
+        }
+
+        .btn-grey {
+            background-color: #D8D8D8;
+            color: #FFF;
+        }
+
+        .rating-block {
+            background-color: #FAFAFA;
+            border: 1px solid #EFEFEF;
+            padding: 15px 15px 20px 15px;
+            border-radius: 3px;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .padding-bottom-7 {
+            padding-bottom: 7px;
+        }
+
+        .review-block {
+            background-color: #FAFAFA;
+            border: 1px solid #EFEFEF;
+            padding: 15px;
+            border-radius: 3px;
+            margin-bottom: 15px;
+        }
+
+        .review-block-name {
+            font-size: 12px;
+            margin: 10px 0;
+        }
+
+        .review-block-date {
+            font-size: 12px;
+        }
+
+        .review-block-rate {
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .review-block-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .review-block-description {
+            font-size: 13px;
+        }
+    </style>
+    <style>
+        .rate {
+            float: left;
+            height: 46px;
+            padding: 0 10px;
+        }
+
+        .rate:not(:checked)>input {
+            position: absolute;
+            display: none;
+        }
+
+        .rate:not(:checked)>label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+
+        .rated:not(:checked)>label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+
+        .rate:not(:checked)>label:before {
+            content: '★ ';
+        }
+
+        .rate>input:checked~label {
+            color: #ffc700;
+        }
+
+        .rate:not(:checked)>label:hover,
+        .rate:not(:checked)>label:hover~label {
+            color: #deb217;
+        }
+
+        .rate>input:checked+label:hover,
+        .rate>input:checked+label:hover~label,
+        .rate>input:checked~label:hover,
+        .rate>input:checked~label:hover~label,
+        .rate>label:hover~input:checked~label {
+            color: #c59b08;
+        }
+
+        .star-rating-complete {
+            color: #c59b08;
+        }
+
+        .rating-container .form-control:hover,
+        .rating-container .form-control:focus {
+            background: #fff;
+            border: 1px solid #ced4da;
+        }
+
+        .rating-container textarea:focus,
+        .rating-container input:focus {
+            color: #000;
+        }
+
+        .rated {
+            float: left;
+            height: 46px;
+            padding: 0 10px;
+        }
+
+        .rated:not(:checked)>input {
+            position: absolute;
+            display: none;
+        }
+
+        .rated:not(:checked)>label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ffc700;
+        }
+
+        .rated:not(:checked)>label:before {
+            content: '★ ';
+        }
+
+        .rated>input:checked~label {
+            color: #ffc700;
+        }
+
+        .rated:not(:checked)>label:hover,
+        .rated:not(:checked)>label:hover~label {
+            color: #deb217;
+        }
+
+        .rated>input:checked+label:hover,
+        .rated>input:checked+label:hover~label,
+        .rated>input:checked~label:hover,
+        .rated>input:checked~label:hover~label,
+        .rated>label:hover~input:checked~label {
+            color: #c59b08;
+        }
+    </style>
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="{{ asset('Frontend') }}/img/breadcrumb.jpg">
         <div class="container">
@@ -107,7 +236,7 @@ h1, h2, h3, h4, h5, h6{
 
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
-                        <h3>{{ $product_details->name }}</h3>  
+                        <h3>{{ $product_details->name }}</h3>
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -162,7 +291,7 @@ h1, h2, h3, h4, h5, h6{
                             </li>
                         </ul>
                         <div class="tab-content">
-                            
+
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Products Infomation</h6>
@@ -177,89 +306,140 @@ h1, h2, h3, h4, h5, h6{
                             </div>
                             <div class="tab-pane mt-5" id="tabs-3" role="tabpanel">
                                 <div class="product__details__tab__des d-block ">
-                                    <form action="{{route('rating.add')}}" method="POST">
-                                        @csrf
-                                        <input type="hidden" value="{{ $product_details->id }}" name="product_id">
-                                        <div class="row">
-                                            <div class="col-3"></div>
-                                            <div class="col-sm-3">
-                                                <div class="rating-block">
-                                                    <h4 class="mb-2 rating-title">Average user rating</h4>
-                                                    <h2 class="ml-2 padding-bottom-7 ">
-                                                        <small class="rating-title"> @if ($avg!=0)
-                                                            {{ $avg/count($rating)}} 
-                                                            @endif</small> <small class="rating-title">/ 5</small>
-                                                        @if (isset($user))
-                                                        <select name="rating" id="rating" class="btn" >
-                            
-                                                            <option value="1" {{$user->rating==1  ? 'selected' : '' }} >★</option>
-                                                            <option value="2"  {{$user->rating==2  ? 'selected' : '' }}>★★</option>
-                                                            <option value="3"  {{$user->rating==3  ? 'selected' : '' }}>★★★</option>
-                                                            <option value="4"  {{$user->rating==5  ? 'selected' : '' }}>★★★★</option>
-                                                            <option value="5"  {{$user->rating==5  ? 'selected' : '' }}>★★★★★</option>
-                                                        </select>
-                                                        @else
-                                                        <select name="rating" id="rating" class="rating-select" >
-                                                            <option value="1">★</option>
-                                                            <option value="2">★★</option>
-                                                            <option value="3">★★★</option>
-                                                            <option value="4">★★★★</option>
-                                                            <option value="5">★★★★★</option>
-                                                        </select>
-                                                    @endif</h2>
-                                   
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <h4 class="mb-2 rating-title"> SUBMIT YOUR REVIEW</h4>
-                                             <textarea name="comment" id="" cols="50" rows="5"></textarea>
-                                             @if (isset(Auth::user()->id))
-                                                 <button class="site-btn">Submit</button>
-                                             @else
-                                               <p class="alt-btn"> Please <a href="/login">login</a>  to write review!</p> 
-                                             @endif
-                                                
-                                            </div>			
-                                        </div>			
-                                        
-                                        <div class="row">
-                                            <div class="col-3"></div>
-                                            <div class="col-sm-6">
-                                                <hr/>
-                                                <div class="review-block">
-                                                    @foreach ($rating as $rating_detail)
-                                                    <div class="row">
-                                                        <col-3></col-3>
-                                                        <div class="col-sm-3">
-                                                            <div class="review-block-name">{{$rating_detail->user->name}}</div>
-                                                            <div class="review-block-date">{{$rating_detail->updated_at->format('M d, Y')}}</div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="review-block-rate">
-                                                                @if ($rating_detail->rating ==1 )
-                                                                <h4>★</h4>
-                                                                @elseif($rating_detail->rating ==2)
-                                                                <h4>★★</h4>
-                                                                @elseif($rating_detail->rating ==3)
-                                                                <h4>★★★</h4>
-                                                                @elseif($rating_detail->rating ==4)
-                                                                <h4>★★★★</h4>
-                                                                @elseif($rating_detail->rating ==5)
-                                                                <h4>★★★★★</h4>
-                                                                @endif                                                              
+                                    @if (!empty($value->star_rating))
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col mt-4">
+                                                    <p class="font-weight-bold ">Review</p>
+                                                    <div class="form-group row">
+                                                        <input type="hidden" name="booking_id"
+                                                            value="{{ $value->id }}">
+                                                        <div class="col">
+                                                            <div class="rated">
+                                                                @for ($i = 1; $i <= $value->star_rating; $i++)
+                                                                    <label class="star-rating-complete"
+                                                                        title="text">{{ $i }} stars</label>
+                                                                @endfor
                                                             </div>
-                                                            
-                                                            <div class="review-block-description">{{$rating_detail->comment}}</div>
                                                         </div>
                                                     </div>
-                                                    <hr/>
-                                                    @endforeach
-                                                   
+                                                    <div class="form-group row mt-4">
+                                                        <div class="col">
+                                                            <p>{{ $value->comments }}</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    @else
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col mt-4">
+                                                    <form class="py-2 px-4" action="{{ route('rating.add') }}"
+                                                        style="box-shadow: 0 0 10px 0 #ddd;" method="POST"
+                                                        autocomplete="off">
+                                                        @csrf
+                                                        <p class="font-weight-bold ">Review</p>
+                                                        <div class="form-group row">
+                                                            <input type="hidden" name="booking_id"
+                                                                value="{{ $product_details->id }}">
+                                                            <input type="hidden" value="{{ $product_details->id }}"
+                                                                name="product_id">
+                                                            <div class="col">
+                                                                @if (isset($user_rating))
+                                                                <div class="rate">
+                                                                    <input type="radio" {{$user_rating->rating==5 ? 'checked'  : "" }} id="star5" class="rate"
+                                                                        name="rating" value="5" />
+                                                                    <label for="star5" title="text">5 stars</label>
+                                                                    <input type="radio"  {{$user_rating->rating==4 ? 'checked'  : "" }} id="star4"
+                                                                        class="rate" name="rating" value="4" />
+                                                                    <label for="star4" title="text">4 stars</label>
+                                                                    <input type="radio" {{$user_rating->rating==3 ? 'checked'  : "" }} id="star3" class="rate"
+                                                                        name="rating" value="3" />
+                                                                    <label for="star3" title="text">3 stars</label>
+                                                                    <input type="radio" {{$user_rating->rating==2 ? 'checked'  : "" }} id="star2" class="rate"
+                                                                        name="rating" value="2">
+                                                                    <label for="star2" title="text">2 stars</label>
+                                                                    <input type="radio" {{$user_rating->rating==1 ? 'checked'  : "" }} id="star1" class="rate"
+                                                                        name="rating" value="1" />
+                                                                    <label for="star1" title="text">1 star</label>
+                                                                </div> 
+                                                                @else
+                                                                <div class="rate">
+                                                                    <input type="radio"  id="star5" class="rate"
+                                                                        name="rating" value="5" />
+                                                                    <label for="star5" title="text">5 stars</label>
+                                                                    <input type="radio"  id="star4"
+                                                                        class="rate" name="rating" value="4" />
+                                                                    <label for="star4" title="text">4 stars</label>
+                                                                    <input type="radio"  id="star3" class="rate"
+                                                                        name="rating" value="3" />
+                                                                    <label for="star3" title="text">3 stars</label>
+                                                                    <input type="radio" id="star2" class="rate"
+                                                                        name="rating" value="2">
+                                                                    <label for="star2" title="text">2 stars</label>
+                                                                    <input type="radio"  id="star1" class="rate"
+                                                                        name="rating" value="1" />
+                                                                    <label for="star1" title="text">1 star</label>
+                                                                </div>
+                                                                @endif
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mt-4">
+                                                            <div class="col">
+                                                                <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200">{{ isset($user_rating) ? $user_rating->comment : 'Enter Your Comment'}}</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-3 text-right">
+                                                            <button class="btn btn-sm py-2 px-3 btn-info">Submit
+                                                            </button>
+                                                        </div>
+                                                        <div class="row">
 
-                                    </form>
+                                                            <div class="col-sm-8">
+                                                                <hr />
+                                                                <div class="review-block">
+                                                                    @foreach ($rating as $rating_detail)
+                                                                        <div class="row">
+                                                                            <col-3></col-3>
+                                                                            <div class="col-sm-3">
+                                                                                <div class="review-block-name">
+                                                                                    {{ $rating_detail->user->name }}</div>
+                                                                                <div class="review-block-date">
+                                                                                    {{ $rating_detail->updated_at->format('M d, Y') }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-sm-8">
+                                                                                <div class="review-block-rate">
+                                                                                    @if ($rating_detail->rating == 1)
+                                                                                        <h4>★</h4>
+                                                                                    @elseif($rating_detail->rating == 2)
+                                                                                        <h4>★★</h4>
+                                                                                    @elseif($rating_detail->rating == 3)
+                                                                                        <h4>★★★</h4>
+                                                                                    @elseif($rating_detail->rating == 4)
+                                                                                        <h4>★★★★</h4>
+                                                                                    @elseif($rating_detail->rating == 5)
+                                                                                        <h4>★★★★★</h4>
+                                                                                    @endif
+                                                                                </div>
+
+                                                                                <div class="review-block-description">
+                                                                                    {{ $rating_detail->comment }}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr />
+                                                                    @endforeach
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

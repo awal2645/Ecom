@@ -183,7 +183,16 @@
                                                 data-setbg="{{ $product->thumbnail_image }}">
                                                 <div class="product__discount__percent">-20%</div>
                                                 <ul class="product__item__pic__hover">
-                                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                    <li>
+                                                        <form id="add_to_whiteList"
+                                                        action="{{ route('add.to.whiteList', $product->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                            <input type="hidden" value="1" name="qty">
+                                                            <button type="submit"><i
+                                                                class="fa fa-heart"></i></button>
+                                                        </form>
+                                                    </li>
                                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                                     <li>
                                                         <form id="add_to_cart"
@@ -191,8 +200,8 @@
                                                             method="POST">
                                                             @csrf
                                                             <input type="hidden" value="1" name="qty">
-                                                            <a onclick='$("#add_to_cart").submit()' type="submit"><i
-                                                                    class="fa fa-shopping-cart"></i></a>
+                                                            <button  type="submit"><i
+                                                                    class="fa fa-shopping-cart"></i></button>
                                                         </form>
                                                     </li>
                                                 </ul>
@@ -249,9 +258,19 @@
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg" data-setbg="{{ $product->thumbnail_image }}">
                                         <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li>
+                                                <form id="add_to_whiteList"
+                                                        action="{{ route('add.to.whiteList', $product->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <input type="hidden" value="1" name="qty">
+                                                        <button type="submit"><i
+                                                            class="fa fa-heart"></i></button>
+                                                </form>
+                                            </li>
                                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                             <li>
+                                                
                                                 <form id="add_to_cart" action="{{ route('add.to.cart', $product->id) }}"
                                                     method="POST">
                                                     @csrf

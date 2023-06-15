@@ -18,6 +18,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SocialAccountController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\UserDetailsController;
+use App\Http\Controllers\WhitelistController;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
@@ -89,9 +90,16 @@ Route::get('contact', [FrontendController::class, 'contactPage'])->name('contact
 
 //Add to cart controller
 Route::get('cart', [AddToCart::class, 'cart'])->name('cart')->middleware('auth');
-Route::post('add-to-cart/{id}', [AddToCart::class, 'addToCart'])->name('add.to.cart');
-Route::patch('update-cart', [AddToCart::class, 'update'])->name('update.cart');
-Route::delete('remove-from-cart', [AddToCart::class, 'remove'])->name('remove.from.cart');
+Route::post('add-to-cart/{id}', [AddToCart::class, 'addToCart'])->name('add.to.cart')->middleware('auth');;
+Route::patch('update-cart', [AddToCart::class, 'update'])->name('update.cart')->middleware('auth');;
+Route::delete('remove-from-cart', [AddToCart::class, 'remove'])->name('remove.from.cart')->middleware('auth');;
+//WhiteList Controller
+Route::get('white-list', [WhitelistController::class, 'whiteList'])->name('whiteList')->middleware('auth');
+Route::post('white-list/{id}', [WhitelistController::class, 'addToWhiteList'])->name('add.to.whiteList')->middleware('auth');;
+Route::patch('update-white-list', [WhitelistController::class, 'update'])->name('update.whiteList')->middleware('auth');;
+Route::delete('remove-white-list', [WhitelistController::class, 'remove'])->name('remove.whiteList')->middleware('auth');;
+Route::get('clear-white-list', [WhitelistController::class, 'clearList'])->name('clear.list')->middleware('auth');;
+//Cheack Out Controller 
 Route::get('checkout', [FrontendController::class, 'checkoutPage'])->name('checkout.page')->middleware('auth');
 Route::post('coupon', [FrontendController::class, 'Coupon'])->name('coupon.page')->middleware('auth');
 

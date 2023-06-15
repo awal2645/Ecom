@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AddToCart extends Controller
 {
@@ -41,6 +42,9 @@ class AddToCart extends Controller
             ];
         }
         session()->put('cart', $cart);
+        $sessionName = 'whiteList' . $id;
+        Session::forget($sessionName);
+        Session::save();
         return redirect()->back()->with('message', 'Product added to cart successfully!');
     }
 
