@@ -4,6 +4,18 @@
 h1, h2, h3, h4, h5, h6{
     color: gold;
 }
+.rating-title{
+    color: black;
+}
+.alt-btn{
+    color: red;
+}
+.alt-btn a{
+    color: green;
+}
+.alt-btn :hover{
+    color: green;
+}
 .glyphicon .glyphicon-sta{
     color: gold;
 }
@@ -146,7 +158,7 @@ h1, h2, h3, h4, h5, h6{
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                    aria-selected="false">Reviews <span>(1)</span></a>
+                                    aria-selected="false">Reviews <span>({{ count($rating) }})</span></a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -172,11 +184,11 @@ h1, h2, h3, h4, h5, h6{
                                             <div class="col-3"></div>
                                             <div class="col-sm-3">
                                                 <div class="rating-block">
-                                                    <h4>Average user rating</h4>
-                                                    <h2 class="ml-2 padding-bottom-7">
-                                                        <small> @if ($avg!=0)
+                                                    <h4 class="mb-2 rating-title">Average user rating</h4>
+                                                    <h2 class="ml-2 padding-bottom-7 ">
+                                                        <small class="rating-title"> @if ($avg!=0)
                                                             {{ $avg/count($rating)}} 
-                                                            @endif</small> <small>/ 5</small>
+                                                            @endif</small> <small class="rating-title">/ 5</small>
                                                         @if (isset($user))
                                                         <select name="rating" id="rating" class="btn" >
                             
@@ -199,9 +211,14 @@ h1, h2, h3, h4, h5, h6{
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
-                                                <h4> Comment</h4>
+                                                <h4 class="mb-2 rating-title"> SUBMIT YOUR REVIEW</h4>
                                              <textarea name="comment" id="" cols="50" rows="5"></textarea>
-                                                <button class="site-btn">Submit</button>
+                                             @if (isset(Auth::user()->id))
+                                                 <button class="site-btn">Submit</button>
+                                             @else
+                                               <p class="alt-btn"> Please <a href="/login">login</a>  to write review!</p> 
+                                             @endif
+                                                
                                             </div>			
                                         </div>			
                                         

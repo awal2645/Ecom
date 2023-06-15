@@ -11,6 +11,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\FrontnendSettingController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductRatingController;
 use App\Http\Controllers\SearchController;
@@ -96,11 +97,16 @@ Route::post('coupon', [FrontendController::class, 'Coupon'])->name('coupon.page'
 
 //Order controller
 Route::get('order/list', [OrderController::class, 'orderList'])->name('order.list');
+Route::get('order/details/{id}', [OrderController::class, 'orderDetails'])->name('order.details');
 Route::post('order', [OrderController::class, 'order'])->name('order');
 Route::get('my/order', [OrderController::class, 'myOrder'])->name('my.order');
 Route::get('my/order/edit/{id}', [OrderController::class, 'myOrderEdit'])->name('my.order.edit');
 Route::patch('my/order/update', [OrderController::class, 'updateMyOrder'])->name('update.myorder');
 Route::delete('my/order/remove', [OrderController::class, 'orderRemove'])->name('order.remove');
+
+//Invoice Controller 
+Route::get('invoice/{id}', [InvoiceController::class, 'Invoice'])->name('invoice');
+
 
 //Shiping update controller
 Route::post('order/status-update', [OrderController::class, 'orderStatusUpdate'])->name('order.status.update');

@@ -30,4 +30,8 @@ class Shiping extends Model
     {
         return $this->belongsTo(User::class, "user_id");
     }
+    public function userdetail()
+    {
+        return $this->belongsTo(UserDetails::class, "user_id");
+    }
 }

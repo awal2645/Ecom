@@ -20,6 +20,13 @@ class OrderController extends Controller
         return view("Backend.Order.orderList", ['orderLists'=>$orderLists]);
      }
     
+     public function orderDetails($id){
+        $orderDetails = Shiping::find($id);
+        $product_details = Order::where('order_id', $orderDetails->order_id)->get();
+        $product_price = Order::where('order_id', $orderDetails->order_id)->sum('price');
+        return view("Backend.Order.orderDetails", ['orderDetails'=>$orderDetails , 'product_details' =>$product_details,'product_price'=>$product_price]);
+
+     }
     //order store ontroller
 
     public function order(Request $request)
@@ -109,8 +116,6 @@ class OrderController extends Controller
             if (isset($orderRemove)) {
                 $orderRemove->delete();
             }
-
-
             session()->flash('error', 'Product removed successfully');
         }
     }

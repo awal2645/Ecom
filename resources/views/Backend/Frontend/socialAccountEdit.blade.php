@@ -29,6 +29,7 @@
             </div>
             <div class="form-group">
               <label for="icon_name">Social Accouont Icon</label>
+              
               <input type="text" name="icon_name" class="form-control text-white"  value="{{$socialAccountEdit->icon_name}}" id="icon_name"  placeholder="Enter Social Accouont Icon">
               @error('icon_name')
                 <p class=" text-danger" role="alert">

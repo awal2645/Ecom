@@ -9,10 +9,14 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th>Profile</th>
-                <th>Order Status</th>
+                <th>Customer</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Amount</th>
+                <th>Order Date</th>
                 <th>Payment Status</th>
                 <th>Shiping Status</th>
+                <th>Action </th>
               </tr>
             </thead>
             <tbody>
@@ -20,6 +24,13 @@
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>  {{$orderList->user->name}}</td>
+                        <td>  {{$orderList->user->email}}</td>
+                        <td>  {{$orderList->userdetail->phone}}</td>
+                        @php
+                            $ammounts = App\Models\Order::where('order_id', $orderList->id )->sum('price');;
+                        @endphp
+                        
+                        <td>{{$ammounts}}</td>
                         <td>{{$orderList->updated_at->format('M d, Y')}}</td>
                         <td><label class="badge badge-success">{{$orderList->payment_status}}</label></td>
                         <td> 
@@ -43,7 +54,11 @@
                                 @endphp>Done</option>
                             </select>
                           </form>
-                      </td>
+                       </td>
+                       <td>
+                        <a class="btn btn-success" href="{{route('order.details',$orderList->id)}}"><i class="mdi mdi-lead-pencil"></i></a>
+                        <a class="btn btn-danger" href=""><i class="mdi mdi-delete"></i></a>
+                    </td>
                     </tr>
                  @endforeach
             </tbody>

@@ -28,8 +28,9 @@
                 @enderror
             </div>
             <div class="form-group">
-              <label for="icon_name">Social Accouont Icon</label>
-              <input type="text" name="icon_name" class="form-control text-white" id="icon_name"  placeholder="Enter Social Accouont Icon">
+              <label for="icon_name">Social Accouont Icon</label> <br>
+              <a href="https://fontawesome.com/v4/icons/" class="text-danger">Only use this link icon class name </a>
+              <input type="text" name="icon_name" class="form-control text-white" id="icon_name"  placeholder="Example - fa fa-address-book-o">
               @error('icon_name')
                 <p class=" text-danger" role="alert">
                     {{ $message }}

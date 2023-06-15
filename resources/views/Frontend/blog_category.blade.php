@@ -108,17 +108,12 @@
                         @endforeach
 
 
-                        {{-- <div class="col-lg-12">
+                        <div class="col-lg-12">
                             <div class="product__pagination blog__pagination">
-                                <a href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                                {!! $blogs->withQueryString()->links('pagination::custom') !!}
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
-                    {!! $blogs->withQueryString()->links('pagination::bootstrap-5') !!}
-
                 </div>
             </div>
         </div>

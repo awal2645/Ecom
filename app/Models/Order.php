@@ -19,4 +19,8 @@ class Order extends Model
     {
         return $this->belongsTo(Shiping::class, "order_id");
     }
+    public function userdetail()
+    {
+        return $this->belongsTo(Shiping::class, "user_id");
+    }
 }

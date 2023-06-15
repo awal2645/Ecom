@@ -70,7 +70,8 @@
             <div class="col-lg-3">
                 <div class="header__logo">
                     <a href="{{ route('home.page') }}"><img src="{{$data->logo}} "
-                            alt=""></a>
+                            alt="">
+                    </a>
                 </div>
             </div>
             <div class="col-lg-6">
