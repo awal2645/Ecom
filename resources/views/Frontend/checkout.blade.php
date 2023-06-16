@@ -66,12 +66,12 @@
                                 <p>Address<span>*</span></p>
                                 <input type="text"
                                     value="{{ !empty(Auth::user()->details->address) ? Auth::user()->details->address : request('address') }}"
-                                    placeholder="Street Address" class="checkout__input__add"  name="address">
-                                    @error('address')
+                                    placeholder="Street Address" class="checkout__input__add" name="address">
+                                @error('address')
                                     <p class=" text-danger" role="alert">
                                         {{ $message }}
                                     </p>
-                                    @enderror
+                                @enderror
                             </div>
                             <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
@@ -92,11 +92,11 @@
                                         <input type="text"
                                             value="{{ !empty(Auth::user()->details->phone) ? Auth::user()->details->phone : '' }}"
                                             name="phone">
-                                            @error('phone')
+                                        @error('phone')
                                             <p class=" text-danger" role="alert">
                                                 {{ $message }}
                                             </p>
-                                            @enderror
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -167,26 +167,17 @@
 
                                     <div class="checkout__order__total">Total <span>${{ $total }}</span></div>
                                 @endif
-                                <div class="checkout__input__checkbox">
-                                    <label for="acc-or">
-                                        Create an account?
-                                        <input type="checkbox" id="acc-or">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua.</p>
+
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
-                                        Check Payment
-                                        <input type="checkbox" id="payment">
+                                        Cash On Delivery <input type="checkbox" name="cod" value="COD" id="payment">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <div class="checkout__input__checkbox">
                                     <label for="paypal">
-                                        Paypal
-                                        <input type="checkbox" id="paypal">
+                                        Stripe
+                                        <input type="checkbox" name="stripe" value="Stripe Payment" id="paypal">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>

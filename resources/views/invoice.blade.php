@@ -118,7 +118,7 @@
         @endphp
         <div class="w-50 float-left logo mt-10">
 
-            <img src="https://lomeyo.com/lomeyo-logo.svg" alt="Logo">
+            <img src="https://themewagon.github.io/ogani/img/logo.png" alt="Logo">
         </div>
         <div style="clear: both;"></div>
     </div>

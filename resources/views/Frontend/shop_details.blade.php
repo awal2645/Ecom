@@ -391,9 +391,16 @@
                                                                 <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200">{{ isset($user_rating) ? $user_rating->comment : 'Enter Your Comment'}}</textarea>
                                                             </div>
                                                         </div>
+                                                        <span></span>
                                                         <div class="mt-3 text-right">
+                                                            @if (isset(Auth::user()->id))
                                                             <button class="btn btn-sm py-2 px-3 btn-info">Submit
                                                             </button>
+                                                            @else
+                                                            <a href="/login" class="btn btn-sm py-2 px-3 btn-info">Login First
+                                                            </a> 
+                                                            @endif
+                                                           
                                                         </div>
                                                         <div class="row">
 

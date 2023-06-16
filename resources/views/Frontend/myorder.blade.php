@@ -8,7 +8,7 @@
                     <div class="breadcrumb__text">
                         <h2>My Order List</h2>
                         <div class="breadcrumb__option">
-                            <a href="{{route('home.page')}}">Home</a>
+                            <a href="{{ route('home.page') }}">Home</a>
                             <span>Order List</span>
                         </div>
                     </div>
@@ -29,6 +29,7 @@
                                     <th class="shoping__product">Order Name</th>
                                     <th class="shoping__product">Shiping Status</th>
                                     <th class="shoping__product">Payment Status</th>
+                                    <th class="shoping__product">Payment Method</th>
                                     <th class="">Action</th>
                                     <th></th>
                                 </tr>
@@ -58,8 +59,21 @@
                                                         <a
                                                             @if ($details->payment_status == 'Paid') class=" btn btn-success " @else href="{{ route('stripe.id', $details->order_id) }}"
                                                                 class=" btn btn-danger " @endif>
-                                                            {{ $details->order->payment_status }} 
+                                                            {{ $details->order->payment_status }}
                                                         </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td data-th="Product" class="shoping__cart__item">
+                                                <div class="row">
+                                                    <div class="col-sm-9">
+                                                        <button class="btn  btn-warning">
+                                                            @if ($details->payment_method == 'cod')
+                                                                Cash On Delivery
+                                                            @else
+                                                                Stripe 
+                                                            @endif
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -71,14 +85,16 @@
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                         <a href="{{ route('invoice', $details->id) }}"
-                                                            class="btn btn-success   ml-2"> 
+                                                            class="btn btn-success   ml-2">
                                                             <i class="fa fa-print" aria-hidden="true"></i>
+                                                        </a>
+                                                        <a href="{{ route('invoice.download', $details->id) }}"
+                                                            class="btn btn-primary   ml-2">
+                                                            <i class="fa fa-download" aria-hidden="true"></i>
                                                         </a>
                                                     </div>
                                                 </div>
-
                                             </td>
-
                                         </tr>
                                     @endforeach
                                 @endif
@@ -91,10 +107,8 @@
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
                         <a href="{{ url('/') }}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </section>

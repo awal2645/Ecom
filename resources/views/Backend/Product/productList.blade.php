@@ -5,9 +5,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-8">
-                        <h4 class="card-title">Category List</h4>
+                        <h4 class="card-title">Product List</h4>
                     </div>
-                    <div class="col-4"> <a href="{{ route('category.add') }}" class="btn btn-success">Category <i
+                    <div class="col-4"> <a href="{{ route('product.add') }}" class="btn btn-success">Brand <i
                                 class="mdi mdi-plus-circle"></i></a></div>
                 </div>
                 <div class="table-responsive">
@@ -21,17 +21,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categoryLists as $key => $categoryList)
+                            @foreach ($productLists as $key => $productList)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td> <img
-                                            src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png"
+                                            src=" {{ isset($productList->thumbnail_image) ? $productList->thumbnail_image : 'https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png' }}"
                                             alt=""></td>
-                                    <td> {{ $categoryList->name }}</td>
+                                    <td> {{ $productList->name }}</td>
                                     <td>
-                                        <a class="btn btn-success" href="{{ route('category.edit', $categoryList->id) }}"><i
+                                        <a class="btn btn-success" href="{{ route('product.edit', $productList->id) }}"><i
                                                 class="mdi mdi-lead-pencil"></i></a>
-                                        <a class="btn btn-danger" href="{{ route('category.delete', $categoryList->id) }}"><i
+                                        <a class="btn btn-danger" href="{{ route('product.delete', $productList->id) }}"><i
                                                 class="mdi mdi-delete"></i></a>
                                     </td>
                                 </tr>

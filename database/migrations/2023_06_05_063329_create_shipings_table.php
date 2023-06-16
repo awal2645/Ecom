@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('pay_ammount')->nullable();
             $table->string('payment_status')->default('Pending');
             $table->string('shiping_status')->default('Pending');
+            $table->string('payment_method')->default('cod');
             $table->string('account_number')->nullable();
             $table->integer('discount_amount')->default(0);
             $table->string('name')->nullable();

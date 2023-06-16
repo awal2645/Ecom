@@ -61,19 +61,37 @@ class OrderController extends Controller
         } else {
             $discount_amount = 0;
         }
-        $shiping_data = Shiping::create([
-            'user_id' => $user_id,
-            'order_id' => $order_id,
-            'discount_amount' => $discount_amount,
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'city' => $request->city,
-            'country' => $request->country,
-            'postcode' => $request->postcode,
-            'address' => $request->address,
-        ]);
-        return redirect()->route('stripe');
+        if(isset($request->cod)){
+            Shiping::create([
+                'user_id' => $user_id,
+                'order_id' => $order_id,
+                'discount_amount' => $discount_amount,
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'city' => $request->city,
+                'country' => $request->country,
+                'postcode' => $request->postcode,
+                'address' => $request->address,
+                'payment_method'=> $request->cod,
+            ]);
+            return redirect()->route('my.order');   
+        }else{
+            $shiping_data = Shiping::create([
+                'user_id' => $user_id,
+                'order_id' => $order_id,
+                'discount_amount' => $discount_amount,
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'city' => $request->city,
+                'country' => $request->country,
+                'postcode' => $request->postcode,
+                'address' => $request->address,
+            ]);
+            return redirect()->route('stripe');
+        }
+       
     }
     public function myOrder()
     {

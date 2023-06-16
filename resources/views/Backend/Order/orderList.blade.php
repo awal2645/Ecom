@@ -41,7 +41,7 @@
                                                 onchange="this.form.submit()">
                                                 <option value="Pending"
                                                     @php
-                                                        if($orderList->shiping_status == "Pending"){
+if($orderList->shiping_status == "Pending"){
                                                          echo "selected";
                                                           } @endphp>
                                                     Pending</option>

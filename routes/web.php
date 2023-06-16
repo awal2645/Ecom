@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\FrontendController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductRatingController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SocialAccountController;
@@ -66,6 +68,22 @@ Route::get('admin/category/edit/{id}', [CategoryController::class, 'categoryEdit
 Route::post('admin/category/update/{id}', [CategoryController::class, 'categoryUpdate'])->name('category.update');
 Route::get('admin/category/delete/{id}', [CategoryController::class, 'categoryDelete'])->name('category.delete');
 
+//Brand Controller Start
+Route::get('admin/brand/list', [BrandController::class, 'brandList'])->name('brand.list');
+Route::get('admin/brand/add', [BrandController::class, 'brandAdd'])->name('brand.add');
+Route::post('admin/brand/store', [BrandController::class, 'brandStore'])->name('brand.store');
+Route::get('admin/brand/edit/{id}', [BrandController::class, 'brandEdit'])->name('brand.edit');
+Route::post('admin/brand/update/{id}', [BrandController::class, 'brandUpdate'])->name('brand.update');
+Route::get('admin/brand/delete/{id}', [BrandController::class, 'brandDelete'])->name('brand.delete');
+
+//Brand Controller Start
+Route::get('admin/product/list', [ProductController::class, 'productList'])->name('product.list');
+Route::get('admin/product/add', [ProductController::class, 'productAdd'])->name('product.add');
+Route::post('admin/product/store', [ProductController::class, 'productStore'])->name('product.store');
+Route::get('admin/product/edit/{id}', [ProductController::class, 'productEdit'])->name('product.edit');
+Route::post('admin/product/update/{id}', [ProductController::class, 'productUpdate'])->name('product.update');
+Route::get('admin/product/delete/{id}', [ProductController::class, 'productDelete'])->name('product.delete');
+
 //Frontend Setting Controller Start
 Route::get('admin/frontend/setting',[FrontnendSettingController::class, 'frontendSetting'])->name('frontend.setting');
 Route::post('admin/frontend/setting/update/{id}',[FrontnendSettingController::class, 'frontendSettingUpdate'])->name('frontend.setting.update');
@@ -114,6 +132,7 @@ Route::delete('my/order/remove', [OrderController::class, 'orderRemove'])->name(
 
 //Invoice Controller 
 Route::get('invoice/{id}', [InvoiceController::class, 'Invoice'])->name('invoice');
+Route::get('invoice-download/{id}', [InvoiceController::class, 'invoiceDownload'])->name('invoice.download');
 
 
 //Shiping update controller

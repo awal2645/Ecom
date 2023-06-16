@@ -1,7 +1,11 @@
+@php
+$data = App\Models\FrontnendSetting::all()->first();
+$socialAccounts = App\Models\SocialAccount::all();
+@endphp
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
         <a class="sidebar-brand brand-logo" href="{{ route('admin') }}"><img
-                src="{{ asset('Backend') }}/assets/images/logo.svg" alt="logo" /></a>
+                src="{{$data->logo}}" alt="logo" /></a>
         <a class="sidebar-brand brand-logo-mini" href="{{ route('admin') }}"><img
                 src="{{ asset('Backend') }}/assets/images/logo-mini.svg" alt="logo" /></a>
     </div>
@@ -63,7 +67,7 @@
             <span class="nav-link">Navigation</span>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="{{route('admin')}}">
+            <a class="nav-link" href="{{ route('admin') }}">
                 <span class="menu-icon">
                     <i class="mdi mdi-speedometer"></i>
                 </span>
@@ -81,9 +85,10 @@
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{route('order.list')}}">Order List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{route('category.list')}}">Category List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('order.list') }}">Order List</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('category.list') }}">Category List</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('brand.list')}}">Brand List</a>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('product.list')}}">Product List</a>
                     </li>
                 </ul>
             </div>
@@ -132,12 +137,12 @@
             <div class="collapse" id="auth">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item ">
-                        <a class="nav-link"
-                            href="{{route('frontend.setting')}}">
+                        <a class="nav-link" href="{{ route('frontend.setting') }}">
                             Settings
                         </a>
                     </li>
-                    <li class="nav-item"> <a class="nav-link" href="{{route('show.social.account')}}"> Social Account</a>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('show.social.account') }}"> Social
+                            Account</a>
                     </li>
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
@@ -145,6 +150,14 @@
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
                 </ul>
             </div>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="pages/icons/mdi.html">
+                <span class="menu-icon">
+                    <i class="mdi mdi-settings"></i>
+                </span>
+                <span class="menu-title">Backend Setting</span>
+            </a>
         </li>
     </ul>
 </nav>

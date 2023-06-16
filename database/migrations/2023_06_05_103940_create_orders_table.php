@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('product_img')->nullable();
             $table->string('payment_status')->default('pending');
+            $table->string('payment_method')->default('cod');
             $table->string('price');
             $table->string('qty');
             $table->string('user_id');

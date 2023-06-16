@@ -73,8 +73,9 @@
                         </table>
                     </div>
                 </div>
-                <div class=" text-center"> <a href="{{ route('invoice', $orderDetails->id) }}"
-                        class="btn btn-primary mt-4  ">Print Invoice</a>
+                <div class=" text-center"> 
+                    <a href="{{ route('invoice', $orderDetails->id) }}" class="btn btn-primary mt-4  ">Print Invoice</a>
+                    <a href="{{ route('invoice.download', $orderDetails->id) }}" class="btn btn-primary mt-4  ">Download Invoice</a>
                 </div>
             </div>
         </div>
