@@ -7,7 +7,7 @@
                     <div class="col-8">
                         <h4 class="card-title">Product List</h4>
                     </div>
-                    <div class="col-4"> <a href="{{ route('product.add') }}" class="btn btn-success">Brand <i
+                    <div class="col-4"> <a href="{{ route('product.add') }}" class="btn btn-success">Product <i
                                 class="mdi mdi-plus-circle"></i></a></div>
                 </div>
                 <div class="table-responsive">

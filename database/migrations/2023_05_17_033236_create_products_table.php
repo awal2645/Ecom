@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create("products", function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->longText("details")->nullable();
+            $table->longText("details")->default('No description');
             $table->string("availability")->nullable();
             $table->string("shipping_time")->nullable();
             $table->string("weight")->nullable();
@@ -22,11 +22,11 @@ return new class extends Migration {
             $table->string("disscount")->nullable();
             $table->integer("price");
             $table->integer("category_id");
-            $table->integer("featured_product")->nullable();
+            $table->string("featured_product")->nullable()->default('isUnChecked');
             $table->integer("status");
             $table->integer("unit")->nullable();
             $table->integer("brand_id")->nullable();
-            $table->text('description');
+            $table->text('description')->default('No description');
             $table->timestamps();
         });
     }

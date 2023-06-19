@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use File;
@@ -22,7 +24,9 @@ class ProductController extends Controller
      */
     public function productAdd()
     {
-        return view('Backend.Product.productAdd');
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('Backend.Product.productAdd', ['categories' =>$categories, 'brands'=> $brands]);
     }
 
     /**
@@ -30,22 +34,35 @@ class ProductController extends Controller
      */
     public function productStore(Request $request)
     {
+       
         $validated = $request->validate([
-            'name' => 'required|unique:brands',
-            'slug' => 'required|unique:brands',
-            'image' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048'
+            'name' => 'required|unique:products',
+            'slug' => 'required|unique:products',
+            'thumbnail_image' => 'required',
+            'category_id' => 'required',
+            'brand_id' => 'required',
             ]);
-        if($request->hasFile('image')){
-            $file = $request->file('image');
+
+            $status = 1;
+        if($request->hasFile('thumbnail_image')){
+            $file = $request->file('thumbnail_image');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/images', $fileName);
             $imgpath = "/storage/images/$fileName";
         } 
         $data = [
             'name' => $request->name,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'brand_id' => $request->brand_id,
+            'availability' => $request->availability,
+            'featured_product' => $request->featured_product,
+            'unit' => $request->unit,
+            'details' => $request->details,
             'slug' => $request->slug,
-            'image' => $imgpath,
+            'status' => $status,
+            'description' => $request->description,
+            'thumbnail_image' => $imgpath,
         ];
         Product::create( $data);
         return redirect()->back()->with('message', 'Product Add successful!');
@@ -57,7 +74,9 @@ class ProductController extends Controller
     public function productEdit($id)
     {
         $productEdit = Product::find($id);
-       return view('Backend.Product.productEdit',['productEdit' => $productEdit]);
+        $categories = Category::all();
+        $brands = Brand::all();
+       return view('Backend.Product.productEdit',['productEdit' => $productEdit,'categories' =>$categories, 'brands'=> $brands]);
     }
 
     /**
@@ -71,24 +90,32 @@ class ProductController extends Controller
             'slug' => 'required',
             ]);
         $productUpdate  = Product::find($id);
-        if($request->hasFile('image')){
-            $file = $request->file('image');
+        if($request->hasFile('thumbnail_image')){
+            $file = $request->file('thumbnail_image');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/images', $fileName);
             $imgpath = "/storage/images/$fileName";
-            if (!empty($productUpdate ->image)) {
+            if (!empty($productUpdate ->thumbnail_image)) {
                 File::delete(public_path() . $productUpdate ->image);
             }
         } else {
-            $imgpath = $request->img_name;
+            $imgpath = $request->image;
         } 
         $data = [
             'name' => $request->name,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'brand_id' => $request->brand_id,
+            'availability' => $request->availability,
+            'featured_product' => $request->featured_product,
+            'unit' => $request->unit,
+            'details' => $request->details,
             'slug' => $request->slug,
-            'image' => $imgpath,
+            'description' => $request->description,
+            'thumbnail_image' => $imgpath,
         ];
         $productUpdate ->update( $data);
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Product Update successful!');
         
     }
 
