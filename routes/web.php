@@ -13,6 +13,7 @@ use App\Http\Controllers\FrontnendSettingController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductRatingController;
@@ -77,7 +78,7 @@ Route::post('admin/brand/update/{id}', [BrandController::class, 'brandUpdate'])-
 Route::get('admin/brand/delete/{id}', [BrandController::class, 'brandDelete'])->name('brand.delete');
 
 //Brand Controller Start
-Route::get('admin/product/list', [ProductController::class, 'productList'])->name('product.list');
+Route::get('admin/list/product', [ProductController::class, 'productList'])->name('product.list');
 Route::get('admin/product/add', [ProductController::class, 'productAdd'])->name('product.add');
 Route::post('admin/product/store', [ProductController::class, 'productStore'])->name('product.store');
 Route::get('admin/product/edit/{id}', [ProductController::class, 'productEdit'])->name('product.edit');
@@ -155,4 +156,8 @@ Route::get('/category/sort/{slug}', [SearchController::class, 'shortByCategory']
 Route::post('product/rating', [ProductRatingController::class, 'ratingAdd'])->name('rating.add')->middleware('auth');
 
 // Frontend  Controller end
+
+
+//main send controller 
+Route::post('send-mail', [MailController::class, 'index'])->name('send.mail');
 

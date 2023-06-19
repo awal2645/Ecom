@@ -1,11 +1,10 @@
 @php
-$data = App\Models\FrontnendSetting::all()->first();
-$socialAccounts = App\Models\SocialAccount::all();
+    $data = App\Models\FrontnendSetting::all()->first();
+    $socialAccounts = App\Models\SocialAccount::all();
 @endphp
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-        <a class="sidebar-brand brand-logo" href="{{ route('admin') }}"><img
-                src="{{$data->logo}}" alt="logo" /></a>
+        <a class="sidebar-brand brand-logo" href="{{ route('admin') }}"><img src="{{ $data->logo }}" alt="logo" /></a>
         <a class="sidebar-brand brand-logo-mini" href="{{ route('admin') }}"><img
                 src="{{ asset('Backend') }}/assets/images/logo-mini.svg" alt="logo" /></a>
     </div>
@@ -74,6 +73,49 @@ $socialAccounts = App\Models\SocialAccount::all();
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
+
+
+
+
+
+
+        <li class="nav-item menu-items">
+            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                <span class="menu-icon">
+                    <i class="mdi mdi-security"></i>
+                </span>
+                <span class="menu-title">Order Manage</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('order.list') }}">
+                            Order List
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('category.list') }}">
+                            Category List
+                        </a>
+                    </li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('category.list') }}"> Brand List </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('product.list') }}"> Product List </a>
+                    </li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+                </ul>
+            </div>
+        </li>
+
+
+
+
+
+
+
+
+
         <li class="nav-item menu-items">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                 aria-controls="ui-basic">
@@ -83,15 +125,8 @@ $socialAccounts = App\Models\SocialAccount::all();
                 <span class="menu-title">Order Manage</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-basic">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('order.list') }}">Order List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('category.list') }}">Category List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{route('brand.list')}}">Brand List</a>
-                    <li class="nav-item"> <a class="nav-link" href="{{route('product.list')}}">Product List</a>
-                    </li>
-                </ul>
-            </div>
+
+
         </li>
         <li class="nav-item menu-items">
             <a class="nav-link" href="pages/forms/basic_elements.html">

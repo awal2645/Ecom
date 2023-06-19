@@ -1,5 +1,9 @@
 @extends('layouts.backend_layouts')
 @section('content')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -11,7 +15,7 @@
                                 class="mdi mdi-plus-circle"></i></a></div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" id="myTable">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -42,6 +46,12 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+    </script>
+    
     <script>
         @if (Session::has('message'))
             toastr.options = {
