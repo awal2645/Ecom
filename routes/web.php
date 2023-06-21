@@ -14,6 +14,7 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductRatingController;
@@ -171,3 +172,6 @@ Route::get('send-noti', function (){
 
 });
 
+// news lettter 
+
+Route::post('newsletter/store',[NewsletterController::class , 'store'])->name('news.letter');
