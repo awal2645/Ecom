@@ -24,7 +24,10 @@ use App\Http\Controllers\UserDetailsController;
 use App\Http\Controllers\WhitelistController;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\InvoicePaid;
+
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -158,6 +161,13 @@ Route::post('product/rating', [ProductRatingController::class, 'ratingAdd'])->na
 // Frontend  Controller end
 
 
-//main send controller 
+//Mail  Controller 
 Route::post('send-mail', [MailController::class, 'index'])->name('send.mail');
+
+// Notifications
+Route::get('send-noti', function (){
+    $user = User::find(1);
+    $user->notify(new InvoicePaid($user));
+
+});
 

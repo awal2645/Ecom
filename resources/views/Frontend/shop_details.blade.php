@@ -1,6 +1,17 @@
 @extends('layouts.frontend_layouts')
 @section('content')
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
+    <!-- SweetAlert JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+
     <style>
+        .swal2-cancel {
+            background-color: red !important;
+            border-color: red !important;
+        }
+
         h1,
         h2,
         h3,
@@ -347,60 +358,91 @@
                                                                 name="product_id">
                                                             <div class="col">
                                                                 @if (isset($user_rating))
-                                                                <div class="rate">
-                                                                    <input type="radio" {{$user_rating->rating==5 ? 'checked'  : "" }} id="star5" class="rate"
-                                                                        name="rating" value="5" />
-                                                                    <label for="star5" title="text">5 stars</label>
-                                                                    <input type="radio"  {{$user_rating->rating==4 ? 'checked'  : "" }} id="star4"
-                                                                        class="rate" name="rating" value="4" />
-                                                                    <label for="star4" title="text">4 stars</label>
-                                                                    <input type="radio" {{$user_rating->rating==3 ? 'checked'  : "" }} id="star3" class="rate"
-                                                                        name="rating" value="3" />
-                                                                    <label for="star3" title="text">3 stars</label>
-                                                                    <input type="radio" {{$user_rating->rating==2 ? 'checked'  : "" }} id="star2" class="rate"
-                                                                        name="rating" value="2">
-                                                                    <label for="star2" title="text">2 stars</label>
-                                                                    <input type="radio" {{$user_rating->rating==1 ? 'checked'  : "" }} id="star1" class="rate"
-                                                                        name="rating" value="1" />
-                                                                    <label for="star1" title="text">1 star</label>
-                                                                </div> 
+                                                                    <div class="rate">
+                                                                        <input type="radio"
+                                                                            {{ $user_rating->rating == 5 ? 'checked' : '' }}
+                                                                            id="star5" class="rate" name="rating"
+                                                                            value="5" />
+                                                                        <label for="star5" title="text">5
+                                                                            stars</label>
+                                                                        <input type="radio"
+                                                                            {{ $user_rating->rating == 4 ? 'checked' : '' }}
+                                                                            id="star4" class="rate" name="rating"
+                                                                            value="4" />
+                                                                        <label for="star4" title="text">4
+                                                                            stars</label>
+                                                                        <input type="radio"
+                                                                            {{ $user_rating->rating == 3 ? 'checked' : '' }}
+                                                                            id="star3" class="rate" name="rating"
+                                                                            value="3" />
+                                                                        <label for="star3" title="text">3
+                                                                            stars</label>
+                                                                        <input type="radio"
+                                                                            {{ $user_rating->rating == 2 ? 'checked' : '' }}
+                                                                            id="star2" class="rate" name="rating"
+                                                                            value="2">
+                                                                        <label for="star2" title="text">2
+                                                                            stars</label>
+                                                                        <input type="radio"
+                                                                            {{ $user_rating->rating == 1 ? 'checked' : '' }}
+                                                                            id="star1" class="rate" name="rating"
+                                                                            value="1" />
+                                                                        <label for="star1" title="text">1
+                                                                            star</label>
+                                                                    </div>
                                                                 @else
-                                                                <div class="rate">
-                                                                    <input type="radio"  id="star5" class="rate"
-                                                                        name="rating" value="5" />
-                                                                    <label for="star5" title="text">5 stars</label>
-                                                                    <input type="radio"  id="star4"
-                                                                        class="rate" name="rating" value="4" />
-                                                                    <label for="star4" title="text">4 stars</label>
-                                                                    <input type="radio"  id="star3" class="rate"
-                                                                        name="rating" value="3" />
-                                                                    <label for="star3" title="text">3 stars</label>
-                                                                    <input type="radio" id="star2" class="rate"
-                                                                        name="rating" value="2">
-                                                                    <label for="star2" title="text">2 stars</label>
-                                                                    <input type="radio"  id="star1" class="rate"
-                                                                        name="rating" value="1" />
-                                                                    <label for="star1" title="text">1 star</label>
-                                                                </div>
+                                                                    <div class="rate">
+                                                                        <input type="radio" id="star5"
+                                                                            class="rate" name="rating"
+                                                                            value="5" />
+                                                                        <label for="star5" title="text">5
+                                                                            stars</label>
+                                                                        <input type="radio" id="star4"
+                                                                            class="rate" name="rating"
+                                                                            value="4" />
+                                                                        <label for="star4" title="text">4
+                                                                            stars</label>
+                                                                        <input type="radio" id="star3"
+                                                                            class="rate" name="rating"
+                                                                            value="3" />
+                                                                        <label for="star3" title="text">3
+                                                                            stars</label>
+                                                                        <input type="radio" id="star2"
+                                                                            class="rate" name="rating" value="2">
+                                                                        <label for="star2" title="text">2
+                                                                            stars</label>
+                                                                        <input type="radio" id="star1"
+                                                                            class="rate" name="rating"
+                                                                            value="1" />
+                                                                        <label for="star1" title="text">1
+                                                                            star</label>
+                                                                    </div>
                                                                 @endif
-                                                                
+
                                                             </div>
                                                         </div>
                                                         <div class="form-group row mt-4">
                                                             <div class="col">
-                                                                <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200">{{ isset($user_rating) ? $user_rating->comment : 'Enter Your Comment'}}</textarea>
+                                                                <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200">{{ isset($user_rating) ? $user_rating->comment : '' }}</textarea>
                                                             </div>
                                                         </div>
                                                         <span></span>
                                                         <div class="mt-3 text-right">
                                                             @if (isset(Auth::user()->id))
-                                                            <button class="btn btn-sm py-2 px-3 btn-info">Submit
-                                                            </button>
+                                                                <button class="btn btn-sm py-2 px-3 btn-info">Submit
+                                                                </button>
                                                             @else
-                                                            <a href="/login" class="btn btn-sm py-2 px-3 btn-info">Login First
-                                                            </a> 
+                                                                <!-- Button to trigger SweetAlert -->
+                                                                <a onclick="showConfirmation()"
+                                                                    class="btn btn-sm py-2 px-3 btn-info">Submit
+                                                                </a>
+                                                                <!-- JavaScript code -->
+
+                                                                {{-- <a href="/login"
+                                                                    class="btn btn-sm py-2 px-3 btn-info">Login First
+                                                                </a> --}}
                                                             @endif
-                                                           
+
                                                         </div>
                                                         <div class="row">
 
@@ -533,5 +575,23 @@
             }
             toastr.warning("{{ session('warning') }}");
         @endif
+    </script>
+    <script>
+        function showConfirmation() {
+            Swal.fire({
+                title: 'Unauthenticated?',
+                text: 'If you perform this action, you need to log in to your account first. Do you want to log in now',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, want to login',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    window.location.href = "{{ route('home') }}";
+
+                }
+            });
+        }
     </script>
 @endsection

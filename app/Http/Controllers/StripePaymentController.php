@@ -86,6 +86,7 @@ class StripePaymentController extends Controller
         }
         $updaePaymentStatus = Shiping::where('order_id',$request->order_id)->first();
         $updaePaymentStatus->payment_status = "Paid";
+        $updaePaymentStatus->payment_method = "Stripe";
         $updaePaymentStatus->update();
         return redirect()->route('my.order')->with('message', 'Payment successful!');
     }

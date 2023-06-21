@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Shiping;
+use App\Models\User;
+use App\Notifications\InvoicePaid;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,6 +77,8 @@ class OrderController extends Controller
                 'address' => $request->address,
                 'payment_method'=> $request->cod,
             ]);
+            $user = User::find($user_id);
+            $user->notify(new InvoicePaid($user));
             return redirect()->route('my.order');   
         }else{
             $shiping_data = Shiping::create([
@@ -89,6 +93,10 @@ class OrderController extends Controller
                 'postcode' => $request->postcode,
                 'address' => $request->address,
             ]);
+
+            $user = User::find($user_id);
+            $user->notify(new InvoicePaid($user));
+
             return redirect()->route('stripe');
         }
        
