@@ -1,5 +1,5 @@
 @extends('layouts.frontend_layouts')
-@section('title','Blog Details')
+@section('title', 'Blog Details')
 @section('content')
     <!-- Blog Details Hero Begin -->
     <section class="blog-details-hero set-bg" data-setbg="{{ asset('Frontend') }}/img/blog/details/details-hero.jpg">
@@ -144,7 +144,8 @@
                                     </li>
                                     <li><i class="fa fa-comment-o"></i> 5</li>
                                 </ul>
-                                <h5><a href="{{ url('blog-details/' . $related_blog->slug) }}">{{ $related_blog->name }}</a>
+                                <h5><a
+                                        href="{{ url('blog-details/' . $related_blog->slug) }}">{{ $related_blog->name }}</a>
                                 </h5>
                                 <p>{{ $related_blog->description }} </p>
                             </div>

@@ -1,5 +1,5 @@
 @extends('layouts.frontend_layouts')
-@section('title',' Product Category ')
+@section('title', ' Product Category ')
 @section('content')
     <style>
         a.active {
@@ -240,23 +240,20 @@
                                         <ul class="product__item__pic__hover">
                                             <li>
                                                 <form id="add_to_whiteList"
-                                                action="{{ route('add.to.whiteList', $product->id) }}"
-                                                method="POST">
-                                                @csrf
+                                                    action="{{ route('add.to.whiteList', $product->id) }}"
+                                                    method="POST">
+                                                    @csrf
                                                     <input type="hidden" value="1" name="qty">
-                                                    <button type="submit"><i
-                                                        class="fa fa-heart"></i></button>
+                                                    <button type="submit"><i class="fa fa-heart"></i></button>
                                                 </form>
                                             </li>
                                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                             <li>
-                                                <form id="add_to_cart"
-                                                    action="{{ route('add.to.cart', $product->id) }}"
+                                                <form id="add_to_cart" action="{{ route('add.to.cart', $product->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     <input type="hidden" value="1" name="qty">
-                                                    <button  type="submit"><i
-                                                            class="fa fa-shopping-cart"></i></button>
+                                                    <button type="submit"><i class="fa fa-shopping-cart"></i></button>
                                                 </form>
                                             </li>
                                         </ul>

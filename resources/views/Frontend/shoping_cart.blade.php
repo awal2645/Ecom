@@ -1,5 +1,5 @@
 @extends('layouts.frontend_layouts')
-@section('title','Shoping Cart ')
+@section('title', 'Shoping Cart ')
 @section('content')
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="{{ asset('Frontend') }}/img/breadcrumb.jpg">
@@ -9,7 +9,7 @@
                     <div class="breadcrumb__text">
                         <h2>My Shopping Cart</h2>
                         <div class="breadcrumb__option">
-                            <a href="{{route('home.page')}}">Home</a>                            <span>White List</span>
+                            <a href="{{ route('home.page') }}">Home</a> <span>White List</span>
                             <span>Shopping Cart</span>
                         </div>
                     </div>

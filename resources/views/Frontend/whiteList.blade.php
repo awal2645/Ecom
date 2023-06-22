@@ -1,5 +1,5 @@
 @extends('layouts.frontend_layouts')
-@section('title','White List ')
+@section('title', 'White List ')
 @section('content')
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="{{ asset('Frontend') }}/img/breadcrumb.jpg">
@@ -9,7 +9,7 @@
                     <div class="breadcrumb__text">
                         <h2>My White List</h2>
                         <div class="breadcrumb__option">
-                            <a href="{{route('home.page')}}">Home</a>                            <span>White List</span>
+                            <a href="{{ route('home.page') }}">Home</a> <span>White List</span>
                         </div>
                     </div>
                 </div>

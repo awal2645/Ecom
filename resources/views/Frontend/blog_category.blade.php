@@ -1,5 +1,5 @@
 @extends('layouts.frontend_layouts')
-@section('title',' Blog Category ')
+@section('title', ' Blog Category ')
 @section('content')
     <style>
         .page-item.active .page-link {
@@ -9,7 +9,6 @@
             border-color: #f3f6fa !important; //your color
 
         }
-
         .page-link {
             color: #7fad39;
         }
@@ -101,8 +100,8 @@
                                         </ul>
                                         <h5><a href="{{ url('blog-details/' . $blog->slug) }}">{{ $blog->name }}</a></h5>
                                         <p>{{ $blog->description }} </p>
-                                        <a href="{{ url('blog-details/' . $blog->slug) }}" class="blog__btn">READ MORE <span
-                                                class="arrow_right"></span></a>
+                                        <a href="{{ url('blog-details/' . $blog->slug) }}" class="blog__btn">READ MORE
+                                            <span class="arrow_right"></span></a>
                                     </div>
                                 </div>
                             </div>

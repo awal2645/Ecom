@@ -1,5 +1,5 @@
 @extends('layouts.frontend_layouts')
-@section('title','Shop Details ')
+@section('title', 'Shop Details ')
 @section('content')
     <!-- SweetAlert CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
@@ -269,7 +269,13 @@
                                 </div>
                             </div>
                             <a type="submit" onclick='$("#add_to_cart").submit()' class="primary-btn">ADD TO CARD</a>
-                            <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                            <form id="add_to_whiteList" action="{{ route('add.to.whiteList', $product_details->id) }}"
+                                method="POST">
+                                @csrf
+                                <input type="hidden" value="1" name="qty">
+                                <a type="submit" class="heart-icon" onclick='$("#add_to_whiteList").submit()'><span
+                                        class="icon_heart_alt"></span></a>
+                            </form>
                         </form>
                         <ul>
                             <li><b>Availability</b> <span>{{ $product_details->availability }}</span></li>
@@ -518,23 +524,21 @@
                                 <ul class="product__item__pic__hover">
                                     <li>
                                         <form id="add_to_whiteList"
-                                        action="{{ route('add.to.whiteList', $product->id) }}"
-                                        method="POST">
-                                        @csrf
+                                            action="{{ route('add.to.whiteList', $related_product->id) }}"
+                                            method="POST">
+                                            @csrf
                                             <input type="hidden" value="1" name="qty">
-                                            <button type="submit"><i
-                                                class="fa fa-heart"></i></button>
+                                            <button type="submit"><i class="fa fa-heart"></i></button>
                                         </form>
                                     </li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                     <li>
-                                        <form id="add_to_cart"
-                                            action="{{ route('add.to.cart', $product->id) }}"
+                                        <form id="add_to_cart" action="{{ route('add.to.cart', $related_product->id) }}"
                                             method="POST">
                                             @csrf
                                             <input type="hidden" value="1" name="qty">
-                                            <button  type="submit"><i
-                                                    class="fa fa-shopping-cart"></i></button>
+                                            <a onclick='$("#add_to_cart").submit()' type="submit"><i
+                                                    class="fa fa-shopping-cart"></i></a>
                                         </form>
                                     </li>
                                 </ul>

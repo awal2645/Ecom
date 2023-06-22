@@ -1,5 +1,5 @@
 @extends('layouts.frontend_layouts')
-@section('title','All Blog ')
+@section('title', 'All Blog ')
 @section('content')
     <style>
         a.active {
@@ -103,8 +103,8 @@
                                         </ul>
                                         <h5><a href="{{ url('blog-details/' . $blog->slug) }}">{{ $blog->name }}</a></h5>
                                         <p>{{ $blog->description }} </p>
-                                        <a href="{{ url('blog-details/' . $blog->slug) }}" class="blog__btn">READ MORE <span
-                                                class="arrow_right"></span></a>
+                                        <a href="{{ url('blog-details/' . $blog->slug) }}" class="blog__btn">READ MORE
+                                            <span class="arrow_right"></span></a>
                                     </div>
                                 </div>
                             </div>
