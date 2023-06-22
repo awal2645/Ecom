@@ -1,4 +1,5 @@
 @extends('layouts.frontend_layouts')
+@section('title','My Cart ')
 @section('content')
 <table id="cart" class="table table-hover table-condensed">
     <thead>

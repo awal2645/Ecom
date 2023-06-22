@@ -1,4 +1,5 @@
 @extends('layouts.frontend_layouts')
+@section('title',' Blog Category ')
 @section('content')
     <style>
         .page-item.active .page-link {

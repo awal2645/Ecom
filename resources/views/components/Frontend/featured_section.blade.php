@@ -1,6 +1,6 @@
 @php
     $categories = App\Models\Category::all();
-    $featured = 1;
+    $featured = 'isChecked';
     $featuredProducts = App\Models\Product::where('featured_product', $featured)->get();
 @endphp
 <section class="featured spad">
@@ -26,14 +26,23 @@
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="{{ $product->thumbnail_image }}">
                             <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li>
+                                    <form id="add_to_whiteList"
+                                    action="{{ route('add.to.whiteList', $product->id) }}"
+                                    method="POST">
+                                    @csrf
+                                        <input type="hidden" value="1" name="qty">
+                                        <button type="submit"><i
+                                            class="fa fa-heart"></i></button>
+                                    </form>
+                                </li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                 <li>
                                     <form id="add_to_cart" action="{{ route('add.to.cart', $product->id) }}"
                                         method="POST">
                                         @csrf
                                         <input type="hidden" value="1" name="qty">
-                                        <button type="submit"><i class="fa fa-shopping-cart"></i></button>
+                                        <button  type="submit"><i class="fa fa-shopping-cart "></i></button>
                                     </form>
                                 </li>
                             </ul>

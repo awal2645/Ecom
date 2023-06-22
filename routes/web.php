@@ -66,7 +66,7 @@ Route::post('/admin/profile', [AdminController::class, 'updateAdminDetails'])->n
 Route::post('admin-password', [AdminController::class, 'updateAdminPassword'])->name('update.admin.password');
 
 //Category Controller Start
-Route::get('admin/category/list', [CategoryController::class, 'categoryList'])->name('category.list');
+Route::get('admin/list/category', [CategoryController::class, 'categoryList'])->name('category.list');
 Route::get('admin/category/add', [CategoryController::class, 'categoryAdd'])->name('category.add');
 Route::post('admin/category/store', [CategoryController::class, 'categoryStore'])->name('category.store');
 Route::get('admin/category/edit/{id}', [CategoryController::class, 'categoryEdit'])->name('category.edit');
@@ -74,7 +74,7 @@ Route::post('admin/category/update/{id}', [CategoryController::class, 'categoryU
 Route::get('admin/category/delete/{id}', [CategoryController::class, 'categoryDelete'])->name('category.delete');
 
 //Brand Controller Start
-Route::get('admin/brand/list', [BrandController::class, 'brandList'])->name('brand.list');
+Route::get('admin/list/brand', [BrandController::class, 'brandList'])->name('brand.list');
 Route::get('admin/brand/add', [BrandController::class, 'brandAdd'])->name('brand.add');
 Route::post('admin/brand/store', [BrandController::class, 'brandStore'])->name('brand.store');
 Route::get('admin/brand/edit/{id}', [BrandController::class, 'brandEdit'])->name('brand.edit');
@@ -127,7 +127,7 @@ Route::get('checkout', [FrontendController::class, 'checkoutPage'])->name('check
 Route::post('coupon', [FrontendController::class, 'Coupon'])->name('coupon.page')->middleware('auth');
 
 //Order controller
-Route::get('order/list', [OrderController::class, 'orderList'])->name('order.list');
+Route::get('admin/list/order', [OrderController::class, 'orderList'])->name('order.list');
 Route::get('order/details/{id}', [OrderController::class, 'orderDetails'])->name('order.details');
 Route::post('order', [OrderController::class, 'order'])->name('order');
 Route::get('my/order', [OrderController::class, 'myOrder'])->name('my.order');

@@ -1,4 +1,5 @@
 @extends('layouts.backend_layouts')
+@section('title',' Order Details ')
 @section('content')
     <div class="container">
         <div class="row">

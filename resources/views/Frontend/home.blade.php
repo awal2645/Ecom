@@ -1,4 +1,5 @@
 @extends('layouts.frontend_layouts')
+@section('title','Ogani  ')
 @section('content')
     <!-- Hero Section Begin -->
     @include('components.Frontend.hero_section')

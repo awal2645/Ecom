@@ -1,4 +1,5 @@
 @extends('layouts.backend_layouts')
+@section('title','Frontend Setting ')
 @section('content')
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
@@ -44,6 +45,19 @@
                   {{ $message }}
               </p>
               @enderror
+            </div>
+            <div class="form-group">
+              <label for="openig_time">Openig Time</label>
+              <input type="text" class="form-control text-white" name="openig_time" id="openig_time" value="{{$frontendData->openig_time}}">
+              @error('openig_time')
+              <p class=" text-danger" role="alert">
+                  {{ $message }}
+              </p>
+              @enderror
+            </div>
+            <div class="form-group">
+              <label for="camping_headline">Camping Headline</label>
+              <input type="text" class="form-control text-white" name="camping_headline" id="camping_headline" value="{{$frontendData->camping_headline}}">
             </div>
             <div class="form-group">
               <label for="logo">Frontend Logo </label>

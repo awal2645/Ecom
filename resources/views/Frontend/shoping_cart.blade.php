@@ -1,4 +1,5 @@
 @extends('layouts.frontend_layouts')
+@section('title','Shoping Cart ')
 @section('content')
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="{{ asset('Frontend') }}/img/breadcrumb.jpg">

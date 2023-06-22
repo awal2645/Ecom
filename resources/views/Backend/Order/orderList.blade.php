@@ -1,4 +1,5 @@
 @extends('layouts.backend_layouts')
+@section('title','List Order ')
 @section('content')
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">

@@ -1,4 +1,5 @@
 @extends('layouts.frontend_layouts')
+@section('title','Blog Details')
 @section('content')
     <!-- Blog Details Hero Begin -->
     <section class="blog-details-hero set-bg" data-setbg="{{ asset('Frontend') }}/img/blog/details/details-hero.jpg">

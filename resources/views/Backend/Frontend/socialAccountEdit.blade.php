@@ -1,4 +1,5 @@
 @extends('layouts.backend_layouts')
+@section('title','Edit Social Account ')
 @section('content')
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">

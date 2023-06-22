@@ -13,6 +13,8 @@ class FrontnendSetting extends Model
         'email',
         'tel',
         'address',
+        'openig_time',
+        'camping_headline',
         'logo',
         'banner',
     ];

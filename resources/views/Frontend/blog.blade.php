@@ -1,4 +1,5 @@
 @extends('layouts.frontend_layouts')
+@section('title','All Blog ')
 @section('content')
     <style>
         a.active {

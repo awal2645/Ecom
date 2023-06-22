@@ -10,7 +10,7 @@
                             $socialAccounts = App\Models\SocialAccount::all();
                             @endphp
                             <li> <i class="fa fa-envelope"></i> Email:{{$data->email}}</li>
-                            <li>Free Shipping for all Order of $99</li>
+                            <li>{{$data->camping_headline}}</li>
                         </ul>
                     </div>
                 </div>

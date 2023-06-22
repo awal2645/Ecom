@@ -1,4 +1,5 @@
 @extends('layouts.backend_layouts')
+@section('title',' My Profile ')
 @section('content')
 <div class="row">
     <div class="col-md-3 border-right">
@@ -15,8 +16,8 @@
                 <div class="col-md-12"><label class="labels">Name</label><input type="text" name="name" class="form-control text-white" placeholder="Enter Your Name" value="{{auth('admin')->user()->name}}"></div>
                 <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control text-white" placeholder="Enter Email Id" value="{{auth('admin')->user()->email}}"></div>
                 <div class="col-md-12"><label class="labels">Profile Pic</label><input type="file" name="image" class="form-control btn text-white" placeholder="" value="">
-                    <input type="hidden" name="img_name"  value="{{asset((!empty(auth('admin')->user()->image)) ? auth('admin')->user()->image : "")}}" >
-                    <img src="{{asset((!empty(auth('admin')->user()->image)) ? auth('admin')->user()->image : "") }}" class="img-fluid img-thumbnail" width="150">
+                    <input type="hidden" name="img_name"  value="{{asset((!empty(auth('admin')->user()->image)) ? auth('admin')->user()->image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxEXAyogJ77kzMui01yoNIhZiEcqo2MxE8Lw&usqp=CAU")}}" >
+                    <img src="{{asset((!empty(auth('admin')->user()->image)) ? auth('admin')->user()->image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxEXAyogJ77kzMui01yoNIhZiEcqo2MxE8Lw&usqp=CAU") }}" class="img-fluid img-thumbnail" width="150">
                 </div>
             </div>
             <div class="mt-5 text-center"><button class="btn btn-outline-success btn-fw" type="submit">Save Profile</button></div>

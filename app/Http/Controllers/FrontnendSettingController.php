@@ -49,6 +49,8 @@ class FrontnendSettingController extends Controller
             'email' => $request->email,
             'tel' => $request->tel,
             'address' => $request->address,
+            'openig_time' => $request->openig_time,
+            'camping_headline' => $request->camping_headline,
             'logo' => $logPath,
             'banner' => $bannerPath,
         ];

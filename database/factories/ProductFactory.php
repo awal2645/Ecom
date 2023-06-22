@@ -21,23 +21,26 @@ class ProductFactory extends Factory
         $category_id = Category::all()->random();
         $brand_id = Brand::all()->random();
         $status = 1;
-        $shiping_time= 'within 72 hours shipping.';
+        $shiping_time = 'within 72 hours shipping.';
         $stock = 'In Stock';
+        $isUnChecked = 'isUnChecked';
+        $isChecked = 'isChecked';
+        $randomValue = random_int(0, 1) ? $isChecked : $isUnChecked;
 
         return [
-            "name" => fake()->name(),
-            "details" => fake()->text($maxNbChars = 200),
-            "availability" => $stock,
-            "price" => fake()->numberBetween($min = 100, $max = 1000),
-            "thumbnail_image" => fake()->imageUrl($width = 200, $height = 200),
-            "slug" => fake()->slug(),
-            "unit" => fake()->randomDigit(),
-            "status" => $status,
-            "category_id" => $category_id->id,
-            "brand_id" => $brand_id->id,
-            "description" => fake()->text($maxNbChars = 1000),
-            "shipping_time" => $shiping_time,
-
+            'name' => fake()->name(),
+            'details' => fake()->text($maxNbChars = 200),
+            'availability' => $stock,
+            'price' => fake()->numberBetween($min = 100, $max = 1000),
+            'thumbnail_image' => fake()->imageUrl($width = 200, $height = 200),
+            'slug' => fake()->slug(),
+            'unit' => fake()->randomDigit(),
+            'status' => $status,
+            'category_id' => $category_id->id,
+            'featured_product' => $randomValue,
+            'brand_id' => $brand_id->id,
+            'description' => fake()->text($maxNbChars = 1000),
+            'shipping_time' => $shiping_time,
         ];
     }
 }
