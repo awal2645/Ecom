@@ -213,5 +213,8 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
+    'aliases' => Facade::defaultAliases()->merge([
+        'GoogleTranslate' => Stichoza\GoogleTranslate\GoogleTranslate::class
+    ])->toArray(),
 
 ];

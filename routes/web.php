@@ -13,6 +13,7 @@ use App\Http\Controllers\FrontnendSettingController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\LangController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderController;
@@ -29,6 +30,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\InvoicePaid;
 
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -175,3 +177,14 @@ Route::get('send-noti', function (){
 // news lettter 
 
 Route::post('newsletter/store',[NewsletterController::class , 'store'])->name('news.letter');
+
+// Google-translate Controller
+// Route::get('translate',function(){
+//     $lang = new GoogleTranslate('en');
+//     return $lang->setSource('en')->setTarget('de')->translate("@extends('layouts.frontend_layouts')
+//     @section('title','Ogani  ')
+//     @section('content')
+//     @endsection");
+// });
+Route::get('lang/home', [LangController::class, 'index']);
+Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
