@@ -40,7 +40,7 @@
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
-                            <h4>Department</h4>
+                            <h4> </h4>
                             <ul class=>
                                 @foreach ($categories as $category)
                                     <li>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="sidebar__item">
                             <div class="latest-product__text">
-                                <h4>Latest Products</h4>
+                                <h4>{{ GoogleTranslate::trans("Latest Products", app()->getLocale()) }}</h4>
                                 <div class="latest-product__slider owl-carousel">
                                     @foreach ($latest_products->chunk(3) as $chunk)
                                         <div class="latest-prdouct__slider__item">
@@ -158,7 +158,7 @@
                                                         <img src="{{ $latest_product->thumbnail_image }}" alt="">
                                                     </div>
                                                     <div class="latest-product__item__text">
-                                                        <h6>{{ $latest_product->name }}</h6>
+                                                        <h6> {{ $latest_product->name }}</h6>
                                                         <span>${{ $latest_product->price }}</span>
                                                     </div>
                                                 </a>
@@ -208,7 +208,7 @@
                                             </div>
                                             <div class="product__discount__item__text">
                                                 <span>{{ $product->category->name }}</span>
-                                                <h5><a href="#">{{ $product->name }}</a></h5>
+                                                <h5><a href="{{ route('shop.details.page', $product->slug) }}">{{$product->name}}</a></h5>
                                                 <div class="product__item__price">${{ $product->price }}
                                                     <span>${{ $product->price }}</span>
                                                 </div>
@@ -229,17 +229,17 @@
                                                 Default</option>
                                             <option
                                                 {{ request()->getRequestUri() == '/products/sort?data=asc' ? 'selected' : '' }}
-                                                value="asc">Sort by Name (A-Z)</option>
+                                                value="asc"> {{ GoogleTranslate::trans("Sort by Name (A-Z)" , app()->getLocale()) }}</option>
                                             <option
                                                 {{ request()->getRequestUri() == '/products/sort?data=desc' ? 'selected' : '' }}
-                                                value="desc">Sort by Price (High to Low)</option>
+                                                value="desc"> {{ GoogleTranslate::trans("Sort by Price (High to Low)" , app()->getLocale()) }}</option>
                                         </select>
                                     </form>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6>{{ count($products) }}<span></span> Products found</h6>
+                                    <h6>{{ count($products) }}<span></span>  {{ GoogleTranslate::trans("Products found" , app()->getLocale()) }}</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -281,7 +281,7 @@
                                     </div>
                                     <div class="product__item__text">
                                         <h6><a
-                                                href="{{ url('shop-details/' . $product->slug) }}">{{ $product->name }}</a>
+                                                href="{{ route('shop.details.page', $product->slug) }}"> {{ $product->name }}</a>
                                         </h6>
                                         <h5>${{ $product->price }}</h5>
                                     </div>

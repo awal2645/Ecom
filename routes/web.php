@@ -174,17 +174,8 @@ Route::get('send-noti', function (){
 
 });
 
-// news lettter 
-
+// News lettter Controller
 Route::post('newsletter/store',[NewsletterController::class , 'store'])->name('news.letter');
 
 // Google-translate Controller
-// Route::get('translate',function(){
-//     $lang = new GoogleTranslate('en');
-//     return $lang->setSource('en')->setTarget('de')->translate("@extends('layouts.frontend_layouts')
-//     @section('title','Ogani  ')
-//     @section('content')
-//     @endsection");
-// });
-Route::get('lang/home', [LangController::class, 'index']);
 Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');

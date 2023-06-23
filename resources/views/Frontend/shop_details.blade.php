@@ -214,7 +214,6 @@
                         <div class="breadcrumb__option">
                             <a href="./index.html">Home</a>
                             <a href="./index.html">Vegetables</a>
-                            <span> {{ GoogleTranslate::trans('Welcome to ItSolutionStuff.com', app()->getLocale()) }}</span>
                         </div>
                     </div>
                 </div>
@@ -245,10 +244,9 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
-                        <h3>  {{ GoogleTranslate::trans( $product_details->name, app()->getLocale()) }}</h3>
+                        <h3> {{ GoogleTranslate::trans($product_details->name, app()->getLocale()) }}</h3>
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -268,7 +266,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <a type="submit" onclick='$("#add_to_cart").submit()' class="primary-btn"> {{ GoogleTranslate::trans("ADD TO CARD ", app()->getLocale()) }}</a>
+                            <a type="submit" onclick='$("#add_to_cart").submit()' class="primary-btn">
+                                {{ GoogleTranslate::trans('ADD TO CARD ', app()->getLocale()) }}</a>
                             <form id="add_to_whiteList" action="{{ route('add.to.whiteList', $product_details->id) }}"
                                 method="POST">
                                 @csrf
@@ -278,10 +277,13 @@
                             </form>
                         </form>
                         <ul>
-                            <li><b>{{ GoogleTranslate::trans("Availability", app()->getLocale()) }}</b> <span>  {{ GoogleTranslate::trans( $product_details->availability, app()->getLocale()) }}</span></li>
-                            <li><b>{{ GoogleTranslate::trans("Shipping", app()->getLocale()) }}</b> <span>{{ $product_details->shipping_time }} </span></li>
-                            <li><b>{{ GoogleTranslate::trans("Weight", app()->getLocale()) }}</b> <span>0.5 kg</span></li>
-                            <li><b>{{ GoogleTranslate::trans("Share on ", app()->getLocale()) }}</b>
+                            <li><b>{{ GoogleTranslate::trans('Availability', app()->getLocale()) }}</b> <span>
+                                    {{ GoogleTranslate::trans($product_details->availability, app()->getLocale()) }}</span>
+                            </li>
+                            <li><b>{{ GoogleTranslate::trans('Shipping', app()->getLocale()) }}</b>
+                                <span>{{ $product_details->shipping_time }} </span></li>
+                            <li><b>{{ GoogleTranslate::trans('Weight', app()->getLocale()) }}</b> <span>0.5 kg</span></li>
+                            <li><b>{{ GoogleTranslate::trans('Share on ', app()->getLocale()) }}</b>
                                 <div class="share">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
                                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -297,29 +299,31 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                    aria-selected="true"> {{ GoogleTranslate::trans("Description", app()->getLocale()) }}</a>
+                                    aria-selected="true">
+                                    {{ GoogleTranslate::trans('Description', app()->getLocale()) }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                                    aria-selected="false"> {{ GoogleTranslate::trans("Information", app()->getLocale()) }}</a>
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" aria-selected="false">
+                                    {{ GoogleTranslate::trans('Information', app()->getLocale()) }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                    aria-selected="false"> {{ GoogleTranslate::trans("Reviews", app()->getLocale()) }}<span>({{ count($rating) }})</span></a>
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab" aria-selected="false">
+                                    {{ GoogleTranslate::trans('Reviews', app()->getLocale()) }}<span>({{ count($rating) }})</span></a>
                             </li>
                         </ul>
                         <div class="tab-content">
 
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6> {{ GoogleTranslate::trans("Products Infomation", app()->getLocale()) }}</h6>
-                                    <p>  {{ GoogleTranslate::trans($product_details->description, app()->getLocale()) }}</p>
+                                    <h6> {{ GoogleTranslate::trans('Products Infomation', app()->getLocale()) }}</h6>
+                                    <p> {{ GoogleTranslate::trans($product_details->description, app()->getLocale()) }}</p>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>  {{ GoogleTranslate::trans(" Products Infomation", app()->getLocale()) }}</h6>
-                                    <p> {{ GoogleTranslate::trans( $product_details->description, app()->getLocale()) }}</p>
+                                    <h6> {{ GoogleTranslate::trans(' Products Infomation', app()->getLocale()) }}</h6>
+                                    <p> {{ GoogleTranslate::trans($product_details->description, app()->getLocale()) }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="tab-pane mt-5" id="tabs-3" role="tabpanel">
@@ -425,7 +429,6 @@
                                                                             star</label>
                                                                     </div>
                                                                 @endif
-
                                                             </div>
                                                         </div>
                                                         <div class="form-group row mt-4">
@@ -449,7 +452,6 @@
                                                                     class="btn btn-sm py-2 px-3 btn-info">Login First
                                                                 </a> --}}
                                                             @endif
-
                                                         </div>
                                                         <div class="row">
 
@@ -487,7 +489,6 @@
                                                                         </div>
                                                                         <hr />
                                                                     @endforeach
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -552,7 +553,6 @@
                         </div>
                     </div>
                 @endforeach
-
             </div>
         </div>
     </section>

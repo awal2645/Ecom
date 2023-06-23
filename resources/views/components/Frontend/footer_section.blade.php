@@ -1,19 +1,23 @@
+@php
+$data = App\Models\FrontnendSetting::all()->first();
+$socialAccounts = App\Models\SocialAccount::all();
+@endphp
 <footer class="footer spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="footer__about">
                     <div class="footer__about__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="/"><img src="{{$data->logo}}" alt=""></a>
                     </div>
                     <ul>
-                        @php
-                            $data = App\Models\FrontnendSetting::all()->first();
-                            $socialAccounts = App\Models\SocialAccount::all();
-                            @endphp
-                        <li>Address:{{$data->address}}</li>
-                        <li>Phone:{{$data->tel}}</li>
-                        <li>Email:{{$data->email}}</li>
+                       
+                        <li>{{ GoogleTranslate::trans('Address', app()->getLocale()) }}:{{ GoogleTranslate::trans($data->address, app()->getLocale()) }}
+                        </li>
+                        <li>{{ GoogleTranslate::trans('Phone', app()->getLocale()) }}:{{ GoogleTranslate::trans($data->tel, app()->getLocale()) }}
+                        </li>
+                        <li>{{ GoogleTranslate::trans('Email', app()->getLocale()) }}:{{ GoogleTranslate::trans($data->email, app()->getLocale()) }}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -40,18 +44,20 @@
             </div>
             <div class="col-lg-4 col-md-12">
                 <div class="footer__widget">
-                    <h6>Join Our Newsletter Now</h6>
-                    <p>Get E-mail updates about our latest shop and special offers.</p>
-                    <form action="{{route('news.letter')}}" method="POST">
+                    <h6> {{ GoogleTranslate::trans('Join Our Newsletter Now', app()->getLocale()) }}</h6>
+                    <p> {{ GoogleTranslate::trans('Get E-mail updates about our latest shop and special offers.', app()->getLocale()) }}
+                    </p>
+                    <form action="{{ route('news.letter') }}" method="POST">
                         @csrf
                         <input type="email" name="email" placeholder="Enter your mail">
-                        <button type="submit" class="site-btn">Subscribe</button>
+                        <button type="submit" class="site-btn">
+                            {{ GoogleTranslate::trans('Subscribe', app()->getLocale()) }}</button>
                     </form>
                     <div class="footer__widget__social">
                         @foreach ($socialAccounts as $socialAccount)
-                        <a href="{{$socialAccount->link}}"><i class="{{$socialAccount->icon_name}}"></i></a>
-                        @endforeach 
-                        
+                            <a href="{{ $socialAccount->link }}"><i class="{{ $socialAccount->icon_name }}"></i></a>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -65,8 +71,9 @@
                             Copyright &copy;
                             <script>
                                 document.write(new Date().getFullYear());
-                            </script> All rights reserved | This template is made with <i
-                                class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            </script>
+                            {{ GoogleTranslate::trans('All rights reserved | This template is made with', app()->getLocale()) }}
+                            <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
                                 target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>

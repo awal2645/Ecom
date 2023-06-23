@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-6">
                 <div class="latest-product__text">
-                    <h4>Latest Products</h4>
+                    <h4> {{ GoogleTranslate::trans("Latest Products", app()->getLocale()) }}</h4>
                     <div class="latest-product__slider owl-carousel">
                         @foreach ($latest_products->chunk(3) as $chunk)
                             <div class="latest-prdouct__slider__item">
@@ -30,7 +30,7 @@
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="latest-product__text">
-                    <h4>Top Rated Products</h4>
+                    <h4> {{ GoogleTranslate::trans("Top Rated Products", app()->getLocale()) }}</h4>
                     <div class="latest-product__slider owl-carousel">
                         @foreach ($latest_products->chunk(3) as $chunk)
                             <div class="latest-prdouct__slider__item">
@@ -55,7 +55,7 @@
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="latest-product__text">
-                    <h4>Review Products</h4>
+                    <h4>{{ GoogleTranslate::trans("Review Products ", app()->getLocale()) }}</h4>
                     <div class="latest-product__slider owl-carousel">
                         @foreach ($latest_products->chunk(3) as $chunk)
                             <div class="latest-prdouct__slider__item">
