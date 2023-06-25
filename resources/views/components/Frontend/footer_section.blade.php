@@ -49,7 +49,12 @@ $socialAccounts = App\Models\SocialAccount::all();
                     </p>
                     <form action="{{ route('news.letter') }}" method="POST">
                         @csrf
-                        <input type="email" name="email" placeholder="Enter your mail">
+                        <input type="email" name="email" placeholder="Enter your mail" required>
+                        @error('email')
+                        <p class=" text-danger" role="alert">
+                            {{ $message }}
+                        </p>
+                    @enderror
                         <button type="submit" class="site-btn">
                             {{ GoogleTranslate::trans('Subscribe', app()->getLocale()) }}</button>
                     </form>

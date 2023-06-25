@@ -1,5 +1,5 @@
 @php
-    $categories = App\Models\Category::all();
+    $categories = App\Models\Category::latest()->take(5)->get();
     $featured = 'isChecked';
     $featuredProducts = App\Models\Product::where('featured_product', $featured)->get();
 @endphp
@@ -12,9 +12,9 @@
                 </div>
                 <div class="featured__controls">
                     <ul>
-                        <li class="active" data-filter="*"> {{ GoogleTranslate::trans("All", app()->getLocale()) }}</li>
+                        <li class="active" data-filter="*">All</li>
                         @foreach ($categories as $category)
-                            <li data-filter=".{{ $category->slug }}">  {{ GoogleTranslate::trans($category->name, app()->getLocale()) }}</li>
+                            <li data-filter=".{{ $category->slug }}"> {{$category->name}} </li>
                         @endforeach
                     </ul>
                 </div>

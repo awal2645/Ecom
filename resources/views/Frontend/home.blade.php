@@ -1,9 +1,7 @@
 @extends('layouts.frontend_layouts')
 @section('title','Ogani  ')
 @section('content')
-    <!-- Hero Section Begin -->
-    @include('components.Frontend.hero_section')
-    <!-- Hero Section End -->
+  
 
     <!-- Categories Section Begin -->
     @include('components.Frontend.categorise_section')

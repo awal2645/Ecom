@@ -49,7 +49,21 @@
                         </div>
                         <div class="sidebar__item">
                             <h4>Price</h4>
-                            <div class="price-range-wrap">
+                            <form action="{{ route('search.shop') }}" method="GET">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="min_price">Min Price</label>
+                                    <input type="number" class="form-control" value="{{ request('min_price') }}"
+                                        id="min_price" name="min_price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="max_price">Max Price</label>
+                                    <input type="number" class="form-control" value="{{ request('max_price') }}"
+                                        id="max_price" name="max_price">
+                                </div>
+                                <button type="submit" class=" site-btn">Search</button>
+                            </form>
+                            {{-- <div class="price-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                     data-min="10" data-max="1000">
                                     <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
@@ -62,7 +76,7 @@
                                         <input type="text" id="maxamount">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="sidebar__item sidebar__item__color--option">
                             <h4>Colors</h4>

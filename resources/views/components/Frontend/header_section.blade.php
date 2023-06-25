@@ -10,7 +10,7 @@
                                 $socialAccounts = App\Models\SocialAccount::all();
                             @endphp
                             <li> <i class="fa fa-envelope"></i> Email:{{ $data->email }}</li>
-                            <li>{{ $data->camping_headline }}</li>
+                            <li> {{ GoogleTranslate::trans($data->camping_headline, app()->getLocale()) }}</li>
                         </ul>
                     </div>
                 </div>
@@ -22,14 +22,15 @@
                             @endforeach
                         </div>
                         <div class="header__top__right__language">
-                            <select class="form-select changeLang">
-                                <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English
-                                </option>
-                                <option value="bn" {{ session()->get('locale') == 'bn' ? 'selected' : '' }}>বাংলা
-                                </option>
-                                <option value="es" {{ session()->get('locale') == 'es' ? 'selected' : '' }}>Spanish
-                                </option>
-                            </select>
+
+                            <img src=" {{ session()->get('locale') == 'en' ? 'https://themewagon.github.io/ogani/img/language.png' : asset('/storage/images/bd.png') }}"
+                                alt="">
+                            <div>{{ session()->get('locale') == 'en' ? 'English' : 'বাংলা' }}</div>
+                            <span class="arrow_carrot-down"></span>
+                            <ul>
+                                <li><a class="lan" data-id="en">English</a></li>
+                                <li><a class="lan" data-id="bn">বাংলা</a></li>
+                            </ul>
                         </div>
                         <div class="header__top__right__auth">
                             @if (!empty(Auth::user()->name))
@@ -55,7 +56,6 @@
                                                 @csrf
                                             </form>
                                         </li>
-
                                     </ul>
                                 </div>
                             @else
@@ -110,7 +110,7 @@
                         <li><a href="{{ route('cart') }}"><i class="fa fa-shopping-bag"></i>
                                 <span>{{ count((array) session('cart')) }}</span></a></li>
                     </ul>
-                    <div class="header__cart__price">item: <span>
+                    <div class="header__cart__price"> {{ GoogleTranslate::trans('item:', app()->getLocale()) }} <span>
                             @php $total = 0 @endphp
                             @if (session('cart'))
                                 @foreach (session('cart') as $id => $details)
@@ -127,12 +127,10 @@
 
     </div>
     <div class="container">
-
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
-
     </div>
 </header>
