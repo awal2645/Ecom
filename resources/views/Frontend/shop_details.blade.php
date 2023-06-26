@@ -233,26 +233,47 @@
                                 src="{{ asset('Frontend') }}/img/product/details/product-details-1.jpg" alt="">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
-                            <img data-imgbigurl="img/product/details/product-details-2.jpg"
+                            <img data-imgbigurl="{{ asset('Frontend') }}/img/product/details/product-details-2.jpg"
                                 src="{{ asset('Frontend') }}/img/product/details/thumb-1.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-3.jpg"
+                            <img data-imgbigurl="{{ asset('Frontend') }}/img/product/details/product-details-3.jpg"
                                 src="{{ asset('Frontend') }}/img/product/details/thumb-2.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-5.jpg"
+                            <img data-imgbigurl="{{ asset('Frontend') }}/img/product/details/product-details-5.jpg"
                                 src="{{ asset('Frontend') }}/img/product/details/thumb-3.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-4.jpg"
+                            <img data-imgbigurl="{{ asset('Frontend') }}/img/product/details/product-details-4.jpg"
                                 src="{{ asset('Frontend') }}/img/product/details/thumb-4.jpg" alt="">
                         </div>
+
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
                         <h3> {{ GoogleTranslate::trans($product_details->name, app()->getLocale()) }}</h3>
                         <div class="product__details__rating">
+                            <!-- Assuming you have included Bootstrap CSS and Font Awesome for star icons -->
+                            @php
+                                $starPoints = floor($avg); // Round down the rating to the nearest whole number
+                                $halfStar = $avg - $starPoints >= 0.5;
+                            @endphp
+                            <!-- Display full stars -->
+                            @for ($i = 0; $i < $starPoints; $i++)
+                                <i class="fa fa-star"></i>
+                            @endfor
+
+                            <!-- Display half star if applicable -->
+                            @if ($halfStar)
+                                <i class="fa fa-star-half-o"></i>
+                            @endif
+
+                            <!-- Display empty stars -->
+                            @for ($i = 0; $i < 5 - $starPoints - ($halfStar ? 1 : 0); $i++)
+                                <i class="fa fa-star-o"></i>
+                            @endfor
+
+                            {{-- <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
+                            <i class="fa fa-star-half-o"></i> --}}
                             <span>({{ count($rating) }})</span>
                         </div>
                         <div class="product__details__price">$ {{ $product_details->price }}</div>
@@ -281,7 +302,8 @@
                                     {{ GoogleTranslate::trans($product_details->availability, app()->getLocale()) }}</span>
                             </li>
                             <li><b>{{ GoogleTranslate::trans('Shipping', app()->getLocale()) }}</b>
-                                <span>{{ $product_details->shipping_time }} </span></li>
+                                <span>{{ $product_details->shipping_time }} </span>
+                            </li>
                             <li><b>{{ GoogleTranslate::trans('Weight', app()->getLocale()) }}</b> <span>0.5 kg</span></li>
                             <li><b>{{ GoogleTranslate::trans('Share on ', app()->getLocale()) }}</b>
                                 <div class="share">
@@ -404,27 +426,28 @@
                                                                 @else
                                                                     <div class="rate">
                                                                         <input type="radio" id="star5"
-                                                                            class="rate" name="rating"
-                                                                            value="5" />
+                                                                            class="rate" name="rating" value="5"
+                                                                            required />
                                                                         <label for="star5" title="text">5
                                                                             stars</label>
                                                                         <input type="radio" id="star4"
-                                                                            class="rate" name="rating"
-                                                                            value="4" />
+                                                                            class="rate" name="rating" value="4"
+                                                                            required />
                                                                         <label for="star4" title="text">4
                                                                             stars</label>
                                                                         <input type="radio" id="star3"
-                                                                            class="rate" name="rating"
-                                                                            value="3" />
+                                                                            class="rate" name="rating" value="3"
+                                                                            required />
                                                                         <label for="star3" title="text">3
                                                                             stars</label>
                                                                         <input type="radio" id="star2"
-                                                                            class="rate" name="rating" value="2">
+                                                                            class="rate" name="rating" value="2"
+                                                                            required>
                                                                         <label for="star2" title="text">2
                                                                             stars</label>
                                                                         <input type="radio" id="star1"
-                                                                            class="rate" name="rating"
-                                                                            value="1" />
+                                                                            class="rate" name="rating" value="1"
+                                                                            required />
                                                                         <label for="star1" title="text">1
                                                                             star</label>
                                                                     </div>
@@ -433,7 +456,7 @@
                                                         </div>
                                                         <div class="form-group row mt-4">
                                                             <div class="col">
-                                                                <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200">{{ isset($user_rating) ? $user_rating->comment : '' }}</textarea>
+                                                                <textarea class="form-control"  name="comment" rows="6 " placeholder="Comment" maxlength="200">{{ isset($user_rating) ? $user_rating->comment : '' }}</textarea>
                                                             </div>
                                                         </div>
                                                         <span></span>
@@ -558,39 +581,7 @@
     </section>
     <!-- Related Product Section End -->
     <script></script>
-    <script>
-        @if (Session::has('message'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.success("{{ session('message') }}");
-        @endif
 
-        @if (Session::has('error'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.error("{{ session('error') }}");
-        @endif
-
-        @if (Session::has('info'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.info("{{ session('info') }}");
-        @endif
-
-        @if (Session::has('warning'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.warning("{{ session('warning') }}");
-        @endif
-    </script>
     <script>
         function showConfirmation() {
             Swal.fire({

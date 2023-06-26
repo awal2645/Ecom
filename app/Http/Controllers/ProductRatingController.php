@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class ProductRatingController extends Controller
 {
     public function ratingAdd(Request $request){
+        $request->validate([
+            'rating' => 'required',
+        ]);
         $user = ProductRating::where('user_id', Auth::user()->id)->first();
         $data = [
         'rating' => $request->rating,

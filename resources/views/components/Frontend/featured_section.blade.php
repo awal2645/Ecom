@@ -1,5 +1,7 @@
 @php
-    $categories = App\Models\Category::latest()->take(5)->get();
+    $categories = App\Models\Category::latest()
+        ->take(5)
+        ->get();
     $featured = 'isChecked';
     $featuredProducts = App\Models\Product::where('featured_product', $featured)->get();
 @endphp
@@ -8,13 +10,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2> {{ GoogleTranslate::trans("Featured Product", app()->getLocale()) }}</h2>
+                    <h2> {{ GoogleTranslate::trans('Featured Product', app()->getLocale()) }}</h2>
                 </div>
                 <div class="featured__controls">
                     <ul>
                         <li class="active" data-filter="*">All</li>
                         @foreach ($categories as $category)
-                            <li data-filter=".{{ $category->slug }}"> {{$category->name}} </li>
+                            <li data-filter=".{{ $category->slug }}"> {{ $category->name }} </li>
                         @endforeach
                     </ul>
                 </div>
@@ -47,7 +49,8 @@
                         </div>
                         <h5>{{ $product->is_featured }}</h5>
                         <div class="featured__item__text">
-                            <h6><a href="{{ route('shop.details.page', $product->slug) }}"> {{$product->name }}</a></h6>
+                            <h6><a href="{{ route('shop.details.page', $product->slug) }}"> {{ $product->name }}</a>
+                            </h6>
                             <h5>${{ $product->price }}</h5>
                         </div>
                     </div>

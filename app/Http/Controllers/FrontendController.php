@@ -70,7 +70,7 @@ class FrontendController extends Controller
         $avg = ProductRating::where('product_id', $product_details->id)->sum('rating');
 
         if(isset(Auth::user()->id)){
-            $user_rating = ProductRating::where('user_id',Auth::user()->id )->first();
+            $user_rating = ProductRating::where('product_id', $product_details->id)->where('user_id',Auth::user()->id )->first();
             return view("Frontend.shop_details", ['product_details' => $product_details, 'related_products' => $related_products,'rating'=>$rating,'avg' => $avg, 'user_rating'=> $user_rating]);
 
         }else{

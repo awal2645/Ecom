@@ -72,7 +72,7 @@
             console.log(dataId);
         });
     </script>
-       <script>
+    <script>
         @if (Session::has('message'))
             toastr.options = {
                 "closeButton": true,

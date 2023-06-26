@@ -1,5 +1,5 @@
 @extends('layouts.backend_layouts')
-@section('title','List Order ')
+@section('title', 'List Order ')
 @section('content')
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
@@ -42,20 +42,20 @@
                                                 onchange="this.form.submit()">
                                                 <option value="Pending"
                                                     @php
-if($orderList->shiping_status == "Pending"){
-                                                         echo "selected";
-                                                          } @endphp>
-                                                    Pending</option>
-                                                <option value="Shiped"
-                                                    @php if($orderList->shiping_status == "Shiped"){
-                                  echo "selected";
-                                } @endphp>
-                                                    Shiped</option>
-                                                <option value="Done"
-                                                    @php if($orderList->shiping_status == "Done"){
-                                  echo "selected";
-                                } @endphp>
-                                                    Done</option>
+                                                            if($orderList->shiping_status == "Pending"){
+                                                                                    echo "selected";
+                                                                                    } @endphp>
+                                                                                Pending</option>
+                                                                            <option value="Shiped"
+                                                                                @php if($orderList->shiping_status == "Shiped"){
+                                                            echo "selected";
+                                                            } @endphp>
+                                                                                Shiped</option>
+                                                                            <option value="Delivered"
+                                                                                @php if($orderList->shiping_status == "Delivered"){
+                                                            echo "selected";
+                                                            } @endphp>
+                                                    Delivered</option>
                                             </select>
                                         </form>
                                     </td>
@@ -72,37 +72,5 @@ if($orderList->shiping_status == "Pending"){
             </div>
         </div>
     </div>
-    <script>
-        @if (Session::has('message'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.success("{{ session('message') }}");
-        @endif
 
-        @if (Session::has('error'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.error("{{ session('error') }}");
-        @endif
-
-        @if (Session::has('info'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.info("{{ session('info') }}");
-        @endif
-
-        @if (Session::has('warning'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.warning("{{ session('warning') }}");
-        @endif
-    </script>
 @endsection

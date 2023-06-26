@@ -12,9 +12,16 @@ class SearchController extends Controller
     {
 
         $categories = Category::all();
-        $products = Product::where('name', 'like', '%' . request('search') . '%')
+        if(request('category')){
+            $products = Product::where('category_id',request('category'))->where('name', 'like', '%' . request('search') . '%')
             ->orWhere('details', 'like', '%' . request('search') . '%')
             ->orWhere('description', 'like', '%' . request('search') . '%')->paginate(10);
+        }else{
+            $products = Product::where('name', 'like', '%' . request('search') . '%')
+            ->orWhere('details', 'like', '%' . request('search') . '%')
+            ->orWhere('description', 'like', '%' . request('search') . '%')->paginate(10);
+        }
+        
         $latest_products = Product::latest()->take(3)->get();
         return view('Frontend.search', ['products' => $products, 'categories' => $categories, 'latest_products' => $latest_products]);
     }

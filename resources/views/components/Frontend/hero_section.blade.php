@@ -26,7 +26,13 @@
                     <div class="hero__search__form">
                         <form action="{{route('search')}}" method="GET">
                             <div class="hero__search__categories">
-                                {{ GoogleTranslate::trans('All departments', app()->getLocale()) }}                            </div>
+                                <select class="form-select" name="category" id="cars">
+                                    <option >All departments</option>
+                                    @foreach ($categories as $category)
+                                    <option  {{(request('category')==$category->id)? 'selected' :''}} value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
+                                  </select>
+                            </div>
                             <input type="search" value="{{request('search')}}" name="search" placeholder="What do yo u need?">
                             <button type="submit" class="site-btn"> {{ GoogleTranslate::trans('SEARCH', app()->getLocale()) }}</button>
                         </form>

@@ -23,9 +23,9 @@
                         </div>
                         <div class="header__top__right__language">
 
-                            <img src=" {{ session()->get('locale') == 'en' ? 'https://themewagon.github.io/ogani/img/language.png' : asset('/storage/images/bd.png') }}"
+                            <img src=" {{ session()->get('locale') == 'bn' ? asset('/storage/images/bd.png'): 'https://themewagon.github.io/ogani/img/language.png' }}"
                                 alt="">
-                            <div>{{ session()->get('locale') == 'en' ? 'English' : 'বাংলা' }}</div>
+                            <div>{{ session()->get('locale') == 'bn' ? 'বাংলা' : 'English' }}</div>
                             <span class="arrow_carrot-down"></span>
                             <ul>
                                 <li><a class="lan" data-id="en">English</a></li>
