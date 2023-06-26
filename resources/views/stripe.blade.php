@@ -61,7 +61,7 @@
                                 <div id="card-element" class="form-control"></div>
                                 <input type="hidden" value="{{ $total }}" name="amount">
                                 <input type="hidden" value="{{ $order_id->order_id }}" name="order_id">
-                                @if ($order_id->shiping->payment_status == "Paid")
+                                @if ($order_id->payment_status == "Paid")
                                 <a  href="{{route('my.order')}}" class="btn btn-danger mt-3" type="button"
                                 style="margin-top: 20px; width: 100%;padding: 7px;" > Your Payment Done 
                             </a>

@@ -10,7 +10,8 @@
                 <div class="hero__categories">
                     <div class="hero__categories__all">
                         <i class="fa fa-bars"></i>
-                        <span> {{ GoogleTranslate::trans('All departments', app()->getLocale()) }} </span>
+                        {{-- <span> {{ GoogleTranslate::trans('All departments', app()->getLocale()) }} </span> --}}
+                        <span> All departments</span>
                     </div>
                     <ul style="display: none;">
                         @foreach ($categories as $category)
@@ -34,7 +35,8 @@
                                   </select>
                             </div>
                             <input type="search" value="{{request('search')}}" name="search" placeholder="What do yo u need?">
-                            <button type="submit" class="site-btn"> {{ GoogleTranslate::trans('SEARCH', app()->getLocale()) }}</button>
+                            {{-- <button type="submit" class="site-btn"> {{ GoogleTranslate::trans('SEARCH', app()->getLocale()) }}</button> --}}
+                            <button type="submit" class="site-btn"> SEARCH</button>
                         </form>
                     </div>
                     <div class="hero__search__phone">
@@ -43,17 +45,23 @@
                         </div>
                         <div class="hero__search__phone__text">
                             <h5>{{$data->tel}}</h5>
-                            <span>  {{ GoogleTranslate::trans('support 24/7 time', app()->getLocale()) }}</span>
+                            {{-- <span>  {{ GoogleTranslate::trans('support 24/7 time', app()->getLocale()) }}</span> --}}
+                            <span>  support 24/7 time</span>
                         </div>
                     </div>
                 </div>
                 @if ( Route::currentRouteName() == 'home.page')
                 <div class="hero__item set-bg mt-2" data-setbg="{{$data->banner}}">
                     <div class="hero__text">
-                        <span> {{ GoogleTranslate::trans('FRUIT FRESH', app()->getLocale()) }}</span>
+                        {{-- <span> {{ GoogleTranslate::trans('FRUIT FRESH', app()->getLocale()) }}</span>
                         <h2> {{ GoogleTranslate::trans('Vegetable', app()->getLocale()) }} <br /> {{ GoogleTranslate::trans('100% Organic', app()->getLocale()) }}</h2>
                         <p> {{ GoogleTranslate::trans('Free Pickup and Delivery Available', app()->getLocale()) }}</p>
                         <a href="{{route('shop.page')}}" class="primary-btn"> {{ GoogleTranslate::trans('SHOP NOW', app()->getLocale()) }}</a>
+                         --}}
+                         <span> FRUIT FRESH</span>
+                        <h2>Vegetable<br /> 100% Organic</h2>
+                        <p> Free Pickup and Delivery Available</p>
+                        <a href="{{route('shop.page')}}" class="primary-btn"> SHOP NOW</a>
                     </div>
                 </div> 
                 @endif

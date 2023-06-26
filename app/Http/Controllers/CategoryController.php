@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function categoryList()
     {
         $categoryLists = Category::all();
-        return view('Backend.Category.categoryList',['categoryLists'=>$categoryLists]);
+        return view('Backend.Category.categoryList', ['categoryLists' => $categoryLists]);
     }
 
     /**
@@ -30,25 +30,23 @@ class CategoryController extends Controller
      */
     public function categoryStore(Request $request)
     {
-    
         $validated = $request->validate([
             'name' => 'required|unique:categories',
             'slug' => 'required|unique:categories',
             'image' => 'required',
-            ]);
-        if($request->hasFile('image')){
+        ]);
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/images', $fileName);
             $imgpath = "/storage/images/$fileName";
-        } 
+        }
         $data = [
             'name' => $request->name,
             'slug' => $request->slug,
             'image' => $imgpath,
-            
         ];
-        Category::create( $data);
+        Category::create($data);
         return redirect()->back();
     }
 
@@ -58,21 +56,20 @@ class CategoryController extends Controller
     public function categoryEdit($id)
     {
         $categoryEdit = Category::find($id);
-       return view('Backend.Category.categoryEdit',['categoryEdit' => $categoryEdit]);
+        return view('Backend.Category.categoryEdit', ['categoryEdit' => $categoryEdit]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function categoryUpdate(Request $request,  $id)
+    public function categoryUpdate(Request $request, $id)
     {
-        
         $validated = $request->validate([
             'name' => 'required',
             'slug' => 'required',
-            ]);
+        ]);
         $categoryUpdate = Category::find($id);
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/images', $fileName);
@@ -82,24 +79,29 @@ class CategoryController extends Controller
             }
         } else {
             $imgpath = $request->img_name;
-        } 
+        }
         $data = [
             'name' => $request->name,
             'slug' => $request->slug,
             'image' => $imgpath,
         ];
-        $categoryUpdate->update( $data);
+        $categoryUpdate->update($data);
         return redirect()->back();
-        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function categoryDelete( $id)
+    public function categoryDelete($id)
     {
-         Category::find($id)->delete();
-         return redirect()->back();
-    
+        $category = Category::findOrFail($id);
+        
+        // Delete the associated products
+        $category->products()->delete();
+
+        // Delete the category itself
+        $category->delete();
+
+        return redirect()->back();
     }
 }

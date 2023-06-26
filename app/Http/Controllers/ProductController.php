@@ -15,6 +15,8 @@ class ProductController extends Controller
     public function productList()
     {
         
+       $productLists = Product::all();
+
         return view('Backend.Product.productList', ['productLists' => $productLists]);
     }
 

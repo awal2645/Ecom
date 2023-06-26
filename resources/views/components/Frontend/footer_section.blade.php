@@ -12,11 +12,15 @@ $socialAccounts = App\Models\SocialAccount::all();
                     </div>
                     <ul>
                        
-                        <li>{{ GoogleTranslate::trans('Address', app()->getLocale()) }}:{{ GoogleTranslate::trans($data->address, app()->getLocale()) }}
+                        {{-- <li>{{ GoogleTranslate::trans('Address', app()->getLocale()) }}:{{ GoogleTranslate::trans($data->address, app()->getLocale()) }}
                         </li>
                         <li>{{ GoogleTranslate::trans('Phone', app()->getLocale()) }}:{{ GoogleTranslate::trans($data->tel, app()->getLocale()) }}
                         </li>
                         <li>{{ GoogleTranslate::trans('Email', app()->getLocale()) }}:{{ GoogleTranslate::trans($data->email, app()->getLocale()) }}
+                        </li> --}}
+                        <li>Address:{{ $data->address }}</li>
+                        <li>Phone:{{ $data->tel}}</li>
+                        <li>Email:{{ $data->email }}
                         </li>
                     </ul>
                 </div>
@@ -44,9 +48,10 @@ $socialAccounts = App\Models\SocialAccount::all();
             </div>
             <div class="col-lg-4 col-md-12">
                 <div class="footer__widget">
-                    <h6> {{ GoogleTranslate::trans('Join Our Newsletter Now', app()->getLocale()) }}</h6>
-                    <p> {{ GoogleTranslate::trans('Get E-mail updates about our latest shop and special offers.', app()->getLocale()) }}
-                    </p>
+                    {{-- <h6> {{ GoogleTranslate::trans('Join Our Newsletter Now', app()->getLocale()) }}</h6>
+                    <p> {{ GoogleTranslate::trans('Get E-mail updates about our latest shop and special offers.', app()->getLocale()) }}</p> --}}
+                    <h6> Join Our Newsletter Now</h6>
+                    <p>Get E-mail updates about our latest shop and special offers.</p>
                     <form action="{{ route('news.letter') }}" method="POST">
                         @csrf
                         <input type="email" name="email" placeholder="Enter your mail" required>
@@ -55,8 +60,8 @@ $socialAccounts = App\Models\SocialAccount::all();
                             {{ $message }}
                         </p>
                     @enderror
-                        <button type="submit" class="site-btn">
-                            {{ GoogleTranslate::trans('Subscribe', app()->getLocale()) }}</button>
+                        {{-- <button type="submit" class="site-btn"> {{ GoogleTranslate::trans('Subscribe', app()->getLocale()) }}</button> --}}
+                        <button type="submit" class="site-btn"> Subscribe</button>
                     </form>
                     <div class="footer__widget__social">
                         @foreach ($socialAccounts as $socialAccount)
@@ -77,7 +82,8 @@ $socialAccounts = App\Models\SocialAccount::all();
                             <script>
                                 document.write(new Date().getFullYear());
                             </script>
-                            {{ GoogleTranslate::trans('All rights reserved | This template is made with', app()->getLocale()) }}
+                            {{-- {{ GoogleTranslate::trans('All rights reserved | This template is made with', app()->getLocale()) }} --}}
+                            All rights reserved | This template is made with
                             <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
                                 target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
