@@ -26,7 +26,7 @@
                     <div class="hero__search__form">
                         <form action="{{route('search')}}" method="GET">
                             <div class="hero__search__categories">
-                                <select class="form-select" name="category" id="cars">
+                                <select class="form-select" name="category" id="cars" style="border: none;background-color:white;">
                                     <option >All departments</option>
                                     @foreach ($categories as $category)
                                     <option  {{(request('category')==$category->id)? 'selected' :''}} value="{{$category->id}}">{{$category->name}}</option>

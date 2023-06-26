@@ -1,5 +1,5 @@
 @extends('layouts.frontend_layouts')
-@section('title','Edit My Order ')
+@section('title', 'Edit My Order ')
 @section('content')
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="{{ asset('Frontend') }}/img/breadcrumb.jpg">
@@ -31,7 +31,7 @@
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,27 +39,47 @@
                                 @if ($edit_order)
                                     @foreach ($edit_order as $id => $details)
                                         @php  $total += $details['price'] * $details['qty']  @endphp
-                                        <tr data-id="{{ $id=$details->id}}">
+                                        <tr data-id="{{ $id = $details->id }}">
                                             <td data-th="Product" class="shoping__cart__item">
                                                 <div class="row">
                                                     <div class="col-sm-3 hidden-xs"><img src="{{ $details['product_img'] }}"
                                                             width="100" height="100" class="img-responsive" /></div>
                                                     <div class="col-sm-9">
-                                                        <h4 class="nomargin">{{ $details['product_name'] }}</h4>
+
+                                                        <h4 class="nomargin"> <a
+                                                                href="{{ route('shop.details.page', $details->product->slug) }}"
+                                                                style="color: aqua">{{ $details['product_name'] }}</a></h4>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td data-th="Price" class="shoping__cart__price">${{ $details['price'] }}</td>
+                                            @if ($shiping_status->shiping_status=="Pending")
                                             <td data-th="Quantity" class="shoping__cart__quantity">
                                                 <input type="number" value="{{ $details['qty'] }}"
                                                     class="form-control quantity update-cart" />
+                                            </td>  
+                                            @else
+                                            <td data-th="Quantity" class="shoping__cart__quantity">
+                                                <input readonly type="number" value="{{ $details['qty'] }}"
+                                                    class="form-control quantity update-cart" />
                                             </td>
+                                            @endif
+                                            
                                             <td data-th="Subtotal" class="shoping__cart__total">
                                                 ${{ $details['price'] * $details['qty'] }}</td>
-                                            <td class="actions" data-th="">
+                                  
+                                            @if ($shiping_status->shiping_status=="Pending")
+                                               <td class="actions" data-th="">
                                                 <button class="btn btn-danger btn-sm remove-from-cart"><i
                                                         class="fa fa-trash-o"></i></button>
+                                            </td>  
+                                            @else
+                                            <td class="actions" data-th="">
+                                                <button disabled class="btn btn-danger btn-sm remove-from-cart"><i
+                                                        class="fa fa-trash-o"></i></button>
                                             </td>
+                                            @endif
+                                               
                                         </tr>
                                     @endforeach
                                 @endif
@@ -94,7 +114,7 @@
                     id: ele.parents("tr").attr("data-id"),
                     quantity: ele.parents("tr").find(".quantity").val()
                 },
-                
+
                 success: function(response) {
                     $('table').load(location.href + ' .table');
                     window.location.reload();
@@ -124,5 +144,5 @@
             }
         });
     </script>
-     
+
 @endsection

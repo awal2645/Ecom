@@ -60,7 +60,7 @@
                                                         <a
                                                             @if ($details->payment_status == 'Paid') class=" btn btn-success " @else href="{{ route('stripe.id', $details->order_id) }}"
                                                                 class=" btn btn-danger " @endif>
-                                                            {{ $details->order->payment_status }}
+                                                            {{ $details->payment_status }}
                                                         </a>
                                                     </div>
                                                 </div>
